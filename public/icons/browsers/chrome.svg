@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Outer circle -->
+  <circle cx="100" cy="100" r="80" fill="#FFFFFF"/>
+  
+  <!-- Colored sections -->
+  <path d="M100 20A80 80 0 0 1 180 100L100 100z" fill="#EA4335"/>
+  <path d="M180 100A80 80 0 0 1 40 160L100 100z" fill="#34A853"/>
+  <path d="M40 160A80 80 0 0 1 100 20L100 100z" fill="#FBBC05"/>
+  
+  <!-- Inner circle -->
+  <circle cx="100" cy="100" r="30" fill="#4285F4"/>
+  <circle cx="100" cy="100" r="25" fill="white"/>
+</svg>
