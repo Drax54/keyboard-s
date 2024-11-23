@@ -542,21 +542,6 @@ export const games: { [key: string]: Application } = {
       }
     ]
   },
-  rocketleague: {
-    id: "rocketleague",
-    name: "Rocket League",
-    icon: "/icons/games/rocket-league.svg",
-    description: "Soccer car game shortcuts",
-    groups: [
-      {
-        title: "Basic Controls",
-        shortcuts: [
-          { id: "1", keys: ["Space"], description: "Jump/Double Jump" },
-          { id: "2", keys: ["Shift"], description: "Boost" },
-        ],
-      },
-    ],
-  },
   csgo: {
     "id": "csgo",
     "name": "Counter-Strike: Global Offensive",
@@ -1518,66 +1503,5 @@ export const games: { [key: string]: Application } = {
       }
     ]
   },
-  gta5: {
-    id: "gta5",
-    name: "Grand Theft Auto V",
-    icon: "/icons/games/gta5.svg",
-    description: "Open world game shortcuts",
-    groups: [
-      {
-        title: "Vehicle",
-        shortcuts: [
-          { id: "1", keys: ["F"], description: "Enter/Exit vehicle" },
-          { id: "2", keys: ["Space"], description: "Handbrake" },
-        ],
-      },
-    ],
-  },
-  portal2: {
-    id: "portal2",
-    name: "Portal 2",
-    icon: "/icons/games/portal-2.svg",
-    description: "Puzzle game shortcuts",
-    groups: [
-      {
-        title: "Portal Controls",
-        shortcuts: [
-          { id: "1", keys: ["Mouse1"], description: "Fire blue portal" },
-          { id: "2", keys: ["Mouse2"], description: "Fire orange portal" },
-        ],
-      },
-    ],
-  },
-  eldenring: {
-    id: "eldenring",
-    name: "Elden Ring",
-    icon: "/icons/games/elden-ring.svg",
-    description: "Action RPG game shortcuts",
-    groups: [
-      {
-        title: "Combat",
-        shortcuts: [
-          { id: "1", keys: ["R1"], description: "Light attack" },
-          { id: "2", keys: ["R2"], description: "Heavy attack" },
-          { id: "3", keys: ["Circle"], description: "Dodge roll" },
-        ],
-      },
-    ],
-  },
-  "cyberpunk-2077": {
-    id: "cyberpunk-2077",
-    name: "Cyberpunk 2077",
-    icon: "/icons/games/cyberpunk-2077.svg",
-    description: "RPG game shortcuts",
-    groups: [
-      {
-        title: "Interface",
-        shortcuts: [
-          { id: "1", keys: ["I"], description: "Open inventory" },
-          { id: "2", keys: ["M"], description: "Open map" },
-          { id: "3", keys: ["Tab"], description: "Show scanner" },
-        ],
-      },
-    ],
-  },
+
 };

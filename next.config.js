@@ -25,8 +25,8 @@ const nextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['lucide-react'],
     // Improved static optimization
-    staticWorkerRequestDeduping: true,
-    workerThreads: true,
+    // staticWorkerRequestDeduping: true,
+    // workerThreads: true,
     webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'TTFB', 'INP'],
   },
   // Cache optimization

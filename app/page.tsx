@@ -231,6 +231,381 @@
 //   );
 // }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// "use client";
+
+// import { useState } from "react";
+// import { Card } from "@/components/ui/card";
+// import { applications } from "@/data/applications";
+// import { games } from "@/data/games";
+// import { operatingSystems } from "@/data/operating-systems";
+// import { websites } from "@/data/websites";
+// import { browsers } from "@/data/browsers";
+
+// import Link from "next/link";
+
+// interface Item {
+//   id: string;
+//   name: string;
+//   icon: string;
+//   description: string;
+//   featured?: boolean;
+//   platforms?: string[];
+//   groups?: any[];
+// }
+
+// interface CategoryCardProps {
+//   title: string;
+//   items: Item[];
+//   baseUrl: string;
+// }
+
+// function CategoryCard({ title, items, baseUrl }: CategoryCardProps) {
+//   return (
+//     <div>
+//       <h2 className="text-2xl font-bold mb-4">{title}</h2>
+//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+//         {items.map((item) => (
+//           <Link key={item.id} href={`${baseUrl}/${item.id}`}>
+//             <Card className="p-6 hover:shadow-lg transition-shadow h-[120px] flex items-center">
+//               <div className="flex items-start gap-4">
+//                 <div className="w-12 h-12 shrink-0">
+//                   <img
+//                     src={item.icon}
+//                     alt={item.name}
+//                     className="w-full h-full object-contain"
+//                     loading="eager"
+//                     decoding="sync"
+//                   />
+//                 </div>
+//                 <div className="flex-1 min-w-0">
+//                   <h3 className="text-lg font-medium mb-1 truncate">
+//                     {item.name}
+//                   </h3>
+//                   <p className="text-base text-muted-foreground line-clamp-2">
+//                     {item.description}
+//                   </p>
+//                 </div>
+//               </div>
+//             </Card>
+//           </Link>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default function Home() {
+//   const [searchQuery, setSearchQuery] = useState("");
+
+//   // Convert arrays to objects first
+//   const appsObject = Array.isArray(applications)
+//     ? applications.reduce((acc, app) => ({ ...acc, [app.id]: app }), {})
+//     : applications;
+
+//   // Then convert objects to arrays for display
+//   const operatingSystemsArray = Object.values(operatingSystems).filter(item => !item.featured);
+//   const applicationsArray = Object.values(appsObject).filter(item => item.featured);
+//   const gamesArray = Object.values(games).filter(item => item.featured);
+//   const websitesArray = Object.values(websites).filter(item => !item.featured);
+//   const browsersArray = Object.values(browsers).filter(item => item.featured);
+
+
+//   const [filteredResults, setFilteredResults] = useState({
+//     operatingSystems: operatingSystemsArray,
+//     applications: applicationsArray,
+//     games: gamesArray,
+//     websites: websitesArray,
+//     browsers: browsersArray, // Include browsers in filteredResults
+//   });
+
+//   const handleSearch = (query: string) => {
+//     const lowerCaseQuery = query.toLowerCase();
+//     setSearchQuery(lowerCaseQuery);
+
+//     if (lowerCaseQuery) {
+//       setFilteredResults({
+//         operatingSystems: operatingSystemsArray.filter((item) =>
+//           item.name.toLowerCase().includes(lowerCaseQuery) ||
+//           item.description.toLowerCase().includes(lowerCaseQuery)
+//         ),
+//         applications: applicationsArray.filter((item) =>
+//           item.name.toLowerCase().includes(lowerCaseQuery) ||
+//           item.description.toLowerCase().includes(lowerCaseQuery)
+//         ),
+//         games: gamesArray.filter((item) =>
+//           item.name.toLowerCase().includes(lowerCaseQuery) ||
+//           item.description.toLowerCase().includes(lowerCaseQuery)
+//         ),
+//         websites: websitesArray.filter((item) =>
+//           item.name.toLowerCase().includes(lowerCaseQuery) ||
+//           item.description.toLowerCase().includes(lowerCaseQuery)
+//         ),
+//         browsers: browsersArray.filter((item) =>
+//           item.name.toLowerCase().includes(lowerCaseQuery) ||
+//           item.description.toLowerCase().includes(lowerCaseQuery)
+//         ),
+//       });
+//     } else {
+//       setFilteredResults({
+//         operatingSystems: operatingSystemsArray,
+//         applications: applicationsArray,
+//         games: gamesArray,
+//         websites: websitesArray,
+//         browsers: browsersArray, 
+//       });
+//     }
+//   };
+
+//   return (
+//     <div className="space-y-12">
+//       <div className="text-center mb-12">
+//         <h1 className="text-4xl font-bold tracking-tight mb-4">
+//           Keyboard Shortcuts Hub
+//         </h1>
+//         <p className="text-xl text-muted-foreground mb-8">
+//           Your one-stop destination for keyboard shortcuts across different platforms
+//         </p>
+//         <div className="max-w-2xl mx-auto">
+//           <input
+//             type="text"
+//             placeholder="Search applications, games, OS, websites..."
+//             value={searchQuery}
+//             onChange={(e) => handleSearch(e.target.value)}
+//             className="w-full px-4 py-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+//           />
+//         </div>
+//       </div>
+
+//       <div className="space-y-16">
+//         {operatingSystemsArray.length > 0 && (
+//           <CategoryCard
+//             title="Operating Systems"
+//             items={filteredResults.operatingSystems}
+//             baseUrl="/os"
+//           />
+//         )}
+//         {applicationsArray.length > 0 && (
+//           <CategoryCard
+//             title="Software"
+//             items={filteredResults.applications}
+//             baseUrl="/software"
+//           />
+//         )}
+//         {gamesArray.length > 0 && (
+//           <CategoryCard
+//             title="Games"
+//             items={filteredResults.games}
+//             baseUrl="/games"
+//           />
+//         )}
+//         {websitesArray.length > 0 && (
+//           <CategoryCard
+//             title="Websites"
+//             items={filteredResults.websites}
+//             baseUrl="/websites"
+//           />
+//         )}
+//         {filteredResults.browsers.length > 0 && (
+//           <CategoryCard
+//             title="Browsers"
+//             items={filteredResults.browsers}
+//             baseUrl="/browsers"
+//           />
+//         )}
+
+//         {Object.values(filteredResults).every(arr => arr.length === 0) && (
+//           <p className="text-center text-gray-500 py-8">No results found.</p>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+// "use client";
+
+// import { useState } from "react";
+// import { Card } from "@/components/ui/card";
+// import { applications } from "@/data/applications";
+// import { games } from "@/data/games";
+// import { operatingSystems } from "@/data/operating-systems";
+// import { websites } from "@/data/websites";
+// import { browsers } from "@/data/browsers";
+// import Link from "next/link";
+// import { BaseItem, CategoryCardProps } from "@/types/application";
+
+// function CategoryCard({ title, items, baseUrl }: CategoryCardProps) {
+//   return (
+//     <div>
+//       <h2 className="text-2xl font-bold mb-4">{title}</h2>
+//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+//         {items.map((item) => (
+//           <Link key={item.id} href={`${baseUrl}/${item.id}`}>
+//             <Card className="p-6 hover:shadow-lg transition-shadow h-[120px] flex items-center">
+//               <div className="flex items-start gap-4">
+//                 <div className="w-12 h-12 shrink-0">
+//                   <img
+//                     src={item.icon}
+//                     alt={item.name}
+//                     className="w-full h-full object-contain"
+//                     loading="eager"
+//                     decoding="sync"
+//                   />
+//                 </div>
+//                 <div className="flex-1 min-w-0">
+//                   <h3 className="text-lg font-medium mb-1 truncate">
+//                     {item.name}
+//                   </h3>
+//                   <p className="text-base text-muted-foreground line-clamp-2">
+//                     {item.description}
+//                   </p>
+//                 </div>
+//               </div>
+//             </Card>
+//           </Link>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default function Home() {
+//   const [searchQuery, setSearchQuery] = useState("");
+
+//   const operatingSystemsArray = Object.values(operatingSystems)
+//     .filter(isBaseItem)
+//     .filter((item): item is BaseItem => !item.featured);
+
+//   const applicationsArray = Object.values(applications)
+//     .filter(isBaseItem)
+//     .filter((item): item is BaseItem => !!item.featured);
+
+//   const gamesArray = Object.values(games)
+//     .filter(isBaseItem)
+//     .filter((item): item is BaseItem => !!item.featured);
+
+//   const websitesArray = Object.values(websites)
+//     .filter(isBaseItem)
+//     .filter((item): item is BaseItem => !item.featured);
+
+//   const browsersArray = Object.values(browsers)
+//     .filter(isBaseItem)
+//     .filter((item): item is BaseItem => !!item.featured);
+
+//   // Type guard
+//   function isBaseItem(item: unknown): item is BaseItem {
+//     if (!item || typeof item !== 'object') return false;
+//     const i = item as Partial<BaseItem>;
+//     return typeof i.id === 'string' &&
+//       typeof i.name === 'string' &&
+//       typeof i.icon === 'string' &&
+//       typeof i.description === 'string';
+//   }
+
+//   const [filteredResults, setFilteredResults] = useState({
+//     operatingSystems: operatingSystemsArray,
+//     applications: applicationsArray,
+//     games: gamesArray,
+//     websites: websitesArray,
+//     browsers: browsersArray,
+//   }
+//   );
+
+
+//   return (
+//     <div className="space-y-12">
+//       <div className="text-center mb-12">
+//         <h1 className="text-4xl font-bold tracking-tight mb-4">
+//           Keyboard Shortcuts Hub
+//         </h1>
+//         <p className="text-xl text-muted-foreground mb-8">
+//           Your one-stop destination for keyboard shortcuts across different platforms
+//         </p>
+//         <div className="max-w-2xl mx-auto">
+//           <input
+//             type="text"
+//             placeholder="Search applications, games, OS, websites..."
+//             value={searchQuery}
+//             onChange={(e) => handleSearch(e.target.value)}
+//             className="w-full px-4 py-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+//           />
+//         </div>
+//       </div>
+
+//       <div className="space-y-16">
+//         {operatingSystemsArray.length > 0 && (
+//           <CategoryCard
+//             title="Operating Systems"
+//             items={filteredResults.operatingSystems}
+//             baseUrl="/os"
+//           />
+//         )}
+//         {applicationsArray.length > 0 && (
+//           <CategoryCard
+//             title="Software"
+//             items={filteredResults.applications}
+//             baseUrl="/software"
+//           />
+//         )}
+//         {gamesArray.length > 0 && (
+//           <CategoryCard
+//             title="Games"
+//             items={filteredResults.games}
+//             baseUrl="/games"
+//           />
+//         )}
+//         {websitesArray.length > 0 && (
+//           <CategoryCard
+//             title="Websites"
+//             items={filteredResults.websites}
+//             baseUrl="/websites"
+//           />
+//         )}
+//         {filteredResults.browsers.length > 0 && (
+//           <CategoryCard
+//             title="Browsers"
+//             items={filteredResults.browsers}
+//             baseUrl="/browsers"
+//           />
+//         )}
+
+//         {Object.values(filteredResults).every(arr => arr.length === 0) && (
+//           <p className="text-center text-gray-500 py-8">No results found.</p>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
 "use client";
 
 import { useState } from "react";
@@ -240,24 +615,8 @@ import { games } from "@/data/games";
 import { operatingSystems } from "@/data/operating-systems";
 import { websites } from "@/data/websites";
 import { browsers } from "@/data/browsers";
-
 import Link from "next/link";
-
-interface Item {
-  id: string;
-  name: string;
-  icon: string;
-  description: string;
-  featured?: boolean;
-  platforms?: string[];
-  groups?: any[];
-}
-
-interface CategoryCardProps {
-  title: string;
-  items: Item[];
-  baseUrl: string;
-}
+import { BaseItem, CategoryCardProps } from "@/data/types";
 
 function CategoryCard({ title, items, baseUrl }: CategoryCardProps) {
   return (
@@ -297,52 +656,75 @@ function CategoryCard({ title, items, baseUrl }: CategoryCardProps) {
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Convert arrays to objects first
-  const appsObject = Array.isArray(applications)
-    ? applications.reduce((acc, app) => ({ ...acc, [app.id]: app }), {})
-    : applications;
+  // Type guard
+  function isValidApplication(item: unknown): item is BaseItem  {
+    if (!item || typeof item !== 'object') return false;
+    const i = item as Partial<BaseItem >;
+    return typeof i.id === 'string' &&
+           typeof i.name === 'string' &&
+           typeof i.icon === 'string' &&
+           typeof i.description === 'string';
+  }
 
-  // Then convert objects to arrays for display
-  const operatingSystemsArray = Object.values(operatingSystems).filter(item => !item.featured);
-  const applicationsArray = Object.values(appsObject).filter(item => item.featured);
-  const gamesArray = Object.values(games).filter(item => item.featured);
-  const websitesArray = Object.values(websites).filter(item => !item.featured);
-  const browsersArray = Object.values(browsers).filter(item => item.featured);
+  const operatingSystemsArray = Object.values(operatingSystems)
+    .filter(isValidApplication)
+    .filter(item => !item.featured);
 
+  const applicationsArray = Object.values(applications)
+    .filter(isValidApplication)
+    .filter(item => !!item.featured);
+
+  const gamesArray = Object.values(games)
+    .filter(isValidApplication)
+    .filter(item => !!item.featured);
+
+  const websitesArray = Object.values(websites)
+    .filter(isValidApplication)
+    .filter(item => !item.featured);
+
+  const browsersArray = Object.values(browsers)
+    .filter(isValidApplication)
+    .filter(item => !!item.featured);
 
   const [filteredResults, setFilteredResults] = useState({
     operatingSystems: operatingSystemsArray,
     applications: applicationsArray,
     games: gamesArray,
     websites: websitesArray,
-    browsers: browsersArray, // Include browsers in filteredResults
+    browsers: browsersArray,
   });
+
 
   const handleSearch = (query: string) => {
     const lowerCaseQuery = query.toLowerCase();
-    setSearchQuery(lowerCaseQuery);
+    setSearchQuery(query);
 
     if (lowerCaseQuery) {
       setFilteredResults({
-        operatingSystems: operatingSystemsArray.filter((item) =>
-          item.name.toLowerCase().includes(lowerCaseQuery) ||
-          item.description.toLowerCase().includes(lowerCaseQuery)
+        operatingSystems: operatingSystemsArray.filter(
+          item =>
+            item.name.toLowerCase().includes(lowerCaseQuery) ||
+            item.description.toLowerCase().includes(lowerCaseQuery)
         ),
-        applications: applicationsArray.filter((item) =>
-          item.name.toLowerCase().includes(lowerCaseQuery) ||
-          item.description.toLowerCase().includes(lowerCaseQuery)
+        applications: applicationsArray.filter(
+          item =>
+            item.name.toLowerCase().includes(lowerCaseQuery) ||
+            item.description.toLowerCase().includes(lowerCaseQuery)
         ),
-        games: gamesArray.filter((item) =>
-          item.name.toLowerCase().includes(lowerCaseQuery) ||
-          item.description.toLowerCase().includes(lowerCaseQuery)
+        games: gamesArray.filter(
+          item =>
+            item.name.toLowerCase().includes(lowerCaseQuery) ||
+            item.description.toLowerCase().includes(lowerCaseQuery)
         ),
-        websites: websitesArray.filter((item) =>
-          item.name.toLowerCase().includes(lowerCaseQuery) ||
-          item.description.toLowerCase().includes(lowerCaseQuery)
+        websites: websitesArray.filter(
+          item =>
+            item.name.toLowerCase().includes(lowerCaseQuery) ||
+            item.description.toLowerCase().includes(lowerCaseQuery)
         ),
-        browsers: browsersArray.filter((item) =>
-          item.name.toLowerCase().includes(lowerCaseQuery) ||
-          item.description.toLowerCase().includes(lowerCaseQuery)
+        browsers: browsersArray.filter(
+          item =>
+            item.name.toLowerCase().includes(lowerCaseQuery) ||
+            item.description.toLowerCase().includes(lowerCaseQuery)
         ),
       });
     } else {
@@ -351,7 +733,7 @@ export default function Home() {
         applications: applicationsArray,
         games: gamesArray,
         websites: websitesArray,
-        browsers: browsersArray, 
+        browsers: browsersArray,
       });
     }
   };

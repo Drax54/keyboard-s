@@ -43,6 +43,89 @@
 // components/shortcut-group.tsx
 
 
+// "use client";
+
+// import { ShortcutGroup as ShortcutGroupType } from "@/types/shortcut";
+// import { ShortcutCard } from "./shortcut-card";
+
+// interface ShortcutGroupProps {
+//   group: ShortcutGroupType;
+//   platform: "windows" | "mac";
+//   onPlatformChange: (platform: "windows" | "mac") => void;
+//   setPlatform?: React.Dispatch<React.SetStateAction<"windows" | "mac">>;
+//   isWindowsAvailable?: boolean; // Add these properties if needed
+//   isMacAvailable?: boolean;
+// }
+
+// export function ShortcutGroup({
+//   group,
+//   platform,
+//   setPlatform,
+//   isWindowsAvailable,
+//   isMacAvailable,
+// }: ShortcutGroupProps) {
+//   const sectionId = group.title.toLowerCase().replace(/\s+/g, "-");
+
+//   return (
+//     <div>
+//       {/* <h2 className="text-xl font-bold mb-4">{group.title}</h2> */}
+//       <div className="grid gap-4">
+//         {group.shortcuts.map((shortcut: any) => (
+//           <ShortcutCard
+//             key={shortcut.id}
+//             shortcut={shortcut}
+//             platform={platform}
+//             setPlatform={setPlatform} // Pass it here
+//           />
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+// "use client";
+
+// import { ShortcutGroup as ShortcutGroupType } from "@/types/shortcut";
+// import { ShortcutCard } from "./shortcut-card";
+
+// interface ShortcutGroupProps {
+//   group: ShortcutGroupType;
+//   platform: "windows" | "mac";
+//   setPlatform: (platform: "windows" | "mac") => void;
+// }
+
+// export function ShortcutGroup({
+//   group,
+//   platform,
+//   setPlatform,
+// }: ShortcutGroupProps) {
+//   const sectionId = group.title.toLowerCase().replace(/\s+/g, "-");
+
+//   return (
+//     <div>
+//       <div className="grid gap-4">
+//         {group.shortcuts.map((shortcut) => (
+//           <ShortcutCard
+//             key={shortcut.id}
+//             shortcut={shortcut}
+//             platform={platform}
+//             setPlatform={setPlatform}
+//           />
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+// components/shortcut-group.tsx
 "use client";
 
 import { ShortcutGroup as ShortcutGroupType } from "@/types/shortcut";
@@ -51,30 +134,32 @@ import { ShortcutCard } from "./shortcut-card";
 interface ShortcutGroupProps {
   group: ShortcutGroupType;
   platform: "windows" | "mac";
-  onPlatformChange: (platform: "windows" | "mac") => void;
+  setPlatform: (platform: "windows" | "mac") => void;
+  isWindowsAvailable?: boolean; // Optional
+  isMacAvailable?: boolean; // Optional
 }
 
-export function ShortcutGroup({ group, platform, setPlatform  }: ShortcutGroupProps) {
-  const sectionId = group.title.toLowerCase().replace(/\s+/g, '-');
-
+export function ShortcutGroup({
+  group,
+  platform,
+  setPlatform,
+  isWindowsAvailable = false, // Default false
+  isMacAvailable = false, // Default false
+}: ShortcutGroupProps) {
   return (
     <div>
-      {/* <h2 className="text-xl font-bold mb-4">{group.title}</h2> */}
       <div className="grid gap-4">
-        {group.shortcuts.map((shortcut: any) => (
+        {group.shortcuts.map((shortcut) => (
           <ShortcutCard
             key={shortcut.id}
             shortcut={shortcut}
             platform={platform}
-            setPlatform={setPlatform} // Pass it here
+            setPlatform={setPlatform}
+            isWindowsAvailable={isWindowsAvailable}
+            isMacAvailable={isMacAvailable}
           />
         ))}
       </div>
     </div>
   );
 }
-
-
-
-
-

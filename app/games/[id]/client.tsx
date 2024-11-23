@@ -540,14 +540,15 @@
 //   );
 // }
 
-
-
+//app/games/[id]/client.tsx
+// app/games/[id]/client.tsx
 "use client";
 
 import { useState } from "react";
 import { ShortcutGroup } from "@/components/shortcut-group";
 import { Search } from "lucide-react";
 import { UnifiedSidebar } from "@/components/unified-sidebar";
+import { ShortcutGroup as ShortcutGroupType } from "@/types/shortcut";
 
 interface GamePageClientProps {
   initialData: string;
@@ -556,9 +557,12 @@ interface GamePageClientProps {
 export function GamePageClient({ initialData }: GamePageClientProps) {
   const game = JSON.parse(initialData);
 
+  // Ensure `platforms` is a valid array to prevent runtime issues
+  const platforms: string[] = game.platforms || [];
+
   // Determine platform availability
-  const isWindowsAvailable = game.platforms.includes("windows");
-  const isMacAvailable = game.platforms.includes("macos");
+  const isWindowsAvailable = platforms.includes("windows");
+  const isMacAvailable = platforms.includes("macos");
 
   // Global platform state
   const [globalPlatform, setGlobalPlatform] = useState<"windows" | "mac">(() =>
@@ -566,7 +570,7 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
   );
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredGroups, setFilteredGroups] = useState(() => game.groups);
+  const [filteredGroups, setFilteredGroups] = useState<ShortcutGroupType[]>(() => game.groups || []);
 
   const handleSearch = (query: string) => {
     const lowerCaseQuery = query.toLowerCase();
@@ -578,15 +582,15 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
     }
 
     const newFilteredGroups = game.groups
-      .map((group: any) => ({
+      .map((group: ShortcutGroupType) => ({
         ...group,
         shortcuts: group.shortcuts.filter(
-          (shortcut: any) =>
+          (shortcut) =>
             shortcut.description.toLowerCase().includes(lowerCaseQuery) ||
             shortcut.keys.join(" ").toLowerCase().includes(lowerCaseQuery)
         ),
       }))
-      .filter((group: any) => group.shortcuts.length > 0);
+      .filter((group: ShortcutGroupType) => group.shortcuts.length > 0);
 
     setFilteredGroups(newFilteredGroups);
   };
@@ -669,7 +673,7 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
           {/* Shortcuts Groups */}
           <div className="space-y-12">
             {filteredGroups.length > 0 ? (
-              filteredGroups.map((group: any) => (
+              filteredGroups.map((group: ShortcutGroupType) => (
                 <section key={group.title}>
                   <h2
                     id={group.title.toLowerCase().replace(/\s+/g, "-")}
@@ -696,7 +700,7 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
 
       {/* Sidebar */}
       <UnifiedSidebar
-        sections={game.groups.map((group: any) => ({
+        sections={game.groups.map((group: ShortcutGroupType) => ({
           id: group.title.toLowerCase().replace(/\s+/g, "-"),
           title: group.title,
         }))}

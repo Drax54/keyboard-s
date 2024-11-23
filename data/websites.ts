@@ -1,10 +1,7 @@
 // data/websites.ts
-import { Application } from "@/types/shortcut";
+import { Application, DeepReadonly } from "@/types/shortcut";
 
-
-
-
-export const websites: { [key: string]: Application } = {
+export const websites: DeepReadonly<{ [key: string]: Application }> = {
   gmail: {
     "id": "gmail",
     "name": "Gmail",
@@ -2459,6 +2456,7 @@ export const websites: { [key: string]: Application } = {
       }
     ]
   }
-};
+} as const;
 
-module.exports = { websites };
+export type Website = Application;
+// module.exports = { websites };

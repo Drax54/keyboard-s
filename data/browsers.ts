@@ -1667,4 +1667,8 @@ export const browsers = {
 
 
 
-};
+} as const;
+
+
+export type Browsers = typeof browsers;
+export type BrowserId = keyof Browsers;

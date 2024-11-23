@@ -1,27 +1,35 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+    "target": "es5", // JavaScript version to emit. ES5 ensures compatibility with older browsers.
+    "lib": ["dom", "dom.iterable", "esnext"], // Specify library files to include for type-checking.
+    "allowJs": true, // Allows JavaScript files to be compiled.
+    "skipLibCheck": true, // Skips type checking of declaration files for faster builds.
+    "strict": true, // Enables all strict type-checking options.
+    "noEmit": true, // Prevents emitting JavaScript files during compilation.
+    "esModuleInterop": true, // Provides compatibility for CommonJS and ES Module imports.
+    "module": "esnext", // Specifies the module code generation.
+    "moduleResolution": "bundler", // Resolves modules for bundler-like environments (Next.js).
+    "resolveJsonModule": true, // Allows importing JSON files.
+    "isolatedModules": true, // Ensures each file can be compiled in isolation.
+    "jsx": "preserve", // Preserves JSX in output for further transformation by Next.js.
+    "incremental": true, // Enables incremental builds for faster compilation.
+    "baseUrl": ".", // Sets the base directory for module resolution.
+    "paths": {
+      "@/*": ["./*"] // Maps `@/` to the root directory for cleaner imports.
+    },
     "plugins": [
       {
-        "name": "next"
+        "name": "next" // Adds Next.js-specific TypeScript features.
       }
-    ],
-    "paths": {
-      "@/*": ["./*"],
-    }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts", // Ensures Next.js TypeScript definitions are included.
+    "**/*.ts", // Includes all TypeScript files.
+    "**/*.tsx", // Includes all TSX files (React with TypeScript).
+    ".next/types/**/*.ts" // Includes Next.js type definitions for dynamic routes.
+  ],
+  "exclude": [
+    "node_modules" // Excludes third-party dependencies from type-checking.
+  ]
 }

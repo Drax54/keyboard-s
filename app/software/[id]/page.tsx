@@ -162,14 +162,18 @@ import { SoftwarePageClient } from "./client";
 export const dynamic = 'force-static';
 export const revalidate = false;
 
+// Ensure the type of keys in applications
+type ApplicationId = keyof typeof applications;
+
 export async function generateStaticParams() {
   return Object.keys(applications).map((key) => ({
-    id: applications[key].id,
+    id: key, // Use the key directly
   }));
 }
 
 export default function SoftwarePage({ params }: { params: { id: string } }) {
-  const app = applications[params.id];
+  // Assert that params.id is one of the known keys
+  const app = applications[params.id as ApplicationId];
 
   if (!app) {
     notFound();

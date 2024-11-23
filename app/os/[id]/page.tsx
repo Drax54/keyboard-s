@@ -21,13 +21,19 @@
 
 
 // app/os/[id]/page.tsx
+
 import { operatingSystems } from "@/data/operating-systems";
 import { OSPageClient } from "./client";
 import { UnifiedSidebar } from "@/components/unified-sidebar";
 import { notFound } from "next/navigation";
 
-export function generateStaticParams() {
-  return Object.keys(operatingSystems).map((id) => ({ id }));
+export const dynamic = 'force-static';
+export const revalidate = false;
+
+export async function generateStaticParams() {
+  return Object.keys(operatingSystems).map((key) => ({
+    id: key,
+  }));
 }
 
 export default function OSPage({ params }: { params: { id: string } }) {

@@ -1124,21 +1124,37 @@
 // data/applications.ts
 
 
-// export interface Application {
-//   id: string;
-//   name: string;
-//   icon: string;
-//   description: string;
-//   platforms: ("windows" | "macos")[];
-//   groups?: {
-//     title: string;
-//     shortcuts: {
-//       id: string;
-//       description: string;
-//       keys: string[];
-//     }[];
-//   }[];
-// }
+// types/application.d.ts
+
+export interface BaseItem {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  featured?: boolean;
+  platforms?: ReadonlyArray<string>;
+  groups?: ReadonlyArray<{
+    title: string;
+    shortcuts: ReadonlyArray<{
+      id: string;
+      description: string;
+      keys: ReadonlyArray<string>;
+      platforms?: {
+        windows?: ReadonlyArray<string>;
+        mac?: ReadonlyArray<string>;
+      };
+    }>;
+  }>;
+}
+
+export interface CategoryCardProps {
+  title: string;
+  items: ReadonlyArray<BaseItem>;
+  baseUrl: string;
+}
+
+// Add this type assertion utility
+export type ValidId<T> = T extends { [key: string]: any } ? keyof T : never;
 
 export const applications = {
   "microsoft-word": {
@@ -2615,198 +2631,6 @@ export const applications = {
         ],
       }
     ],
-  },
-  "google-chrome-browser": {
-    "id": "google_chrome",
-    "name": "Google Chrome",
-    "icon": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg",
-    "description": "Shortcuts for Google Chrome - Updated for MacOS and Windows OS",
-    "platforms": [
-      "windows",
-      "macos"
-    ],
-    "featured": true,
-    "groups": [
-      {
-        "title": "Tab Management",
-        "shortcuts": [
-          {
-            "id": "1",
-            "keys": [
-              "Ctrl + T"
-            ],
-            "description": "Open a new tab",
-            "platforms": {
-              "windows": [
-                "Ctrl + T"
-              ],
-              "mac": [
-                "\u2318 + T"
-              ]
-            }
-          },
-          {
-            "id": "2",
-            "keys": [
-              "Ctrl + Shift + T"
-            ],
-            "description": "Reopen the last closed tab",
-            "platforms": {
-              "windows": [
-                "Ctrl + Shift + T"
-              ],
-              "mac": [
-                "\u2318 + Shift + T"
-              ]
-            }
-          },
-          {
-            "id": "3",
-            "keys": [
-              "Ctrl + Tab / Ctrl + PageDown"
-            ],
-            "description": "Switch to the next tab",
-            "platforms": {
-              "windows": [
-                "Ctrl + Tab",
-                "Ctrl + PageDown"
-              ],
-              "mac": [
-                "\u2318 + Option + Right Arrow"
-              ]
-            }
-          },
-          {
-            "id": "4",
-            "keys": [
-              "Ctrl + Shift + Tab / Ctrl + PageUp"
-            ],
-            "description": "Switch to the previous tab",
-            "platforms": {
-              "windows": [
-                "Ctrl + Shift + Tab",
-                "Ctrl + PageUp"
-              ],
-              "mac": [
-                "\u2318 + Option + Left Arrow"
-              ]
-            }
-          },
-          {
-            "id": "5",
-            "keys": [
-              "Ctrl + 1-8"
-            ],
-            "description": "Switch to a specific tab",
-            "platforms": {
-              "windows": [
-                "Ctrl + 1-8"
-              ],
-              "mac": [
-                "\u2318 + 1-8"
-              ]
-            }
-          },
-          {
-            "id": "6",
-            "keys": [
-              "Ctrl + 9"
-            ],
-            "description": "Switch to the last tab",
-            "platforms": {
-              "windows": [
-                "Ctrl + 9"
-              ],
-              "mac": [
-                "\u2318 + 9"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "title": "Browser Navigation",
-        "shortcuts": [
-          {
-            "id": "7",
-            "keys": [
-              "Alt + Left Arrow / Alt + Right Arrow"
-            ],
-            "description": "Go back / forward in history",
-            "platforms": {
-              "windows": [
-                "Alt + Left Arrow",
-                "Alt + Right Arrow"
-              ],
-              "mac": [
-                "\u2318 + [",
-                "\u2318 + ]"
-              ]
-            }
-          },
-          {
-            "id": "8",
-            "keys": [
-              "Ctrl + W"
-            ],
-            "description": "Close current tab",
-            "platforms": {
-              "windows": [
-                "Ctrl + W"
-              ],
-              "mac": [
-                "\u2318 + W"
-              ]
-            }
-          },
-          {
-            "id": "9",
-            "keys": [
-              "Ctrl + Shift + W"
-            ],
-            "description": "Close entire window",
-            "platforms": {
-              "windows": [
-                "Ctrl + Shift + W"
-              ],
-              "mac": [
-                "\u2318 + Shift + W"
-              ]
-            }
-          },
-          {
-            "id": "10",
-            "keys": [
-              "Ctrl + N"
-            ],
-            "description": "Open a new window",
-            "platforms": {
-              "windows": [
-                "Ctrl + N"
-              ],
-              "mac": [
-                "\u2318 + N"
-              ]
-            }
-          },
-          {
-            "id": "11",
-            "keys": [
-              "Ctrl + Shift + N"
-            ],
-            "description": "Open a new incognito window",
-            "platforms": {
-              "windows": [
-                "Ctrl + Shift + N"
-              ],
-              "mac": [
-                "\u2318 + Shift + N"
-              ]
-            }
-          }
-        ]
-      }
-    ]
   },
   "adobe-illustrator": {
     "id": "adobe-illustrator",

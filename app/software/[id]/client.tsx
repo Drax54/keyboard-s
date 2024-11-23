@@ -178,13 +178,15 @@ import { useState } from "react";
 import { ShortcutGroup } from "@/components/shortcut-group";
 import { Search } from "lucide-react";
 import { UnifiedSidebar } from "@/components/unified-sidebar";
+import { Application } from "@/types/shortcut";
+
 
 interface SoftwarePageClientProps {
   initialData: string;
 }
 
 export function SoftwarePageClient({ initialData }: SoftwarePageClientProps) {
-  const app = JSON.parse(initialData);
+  const app = JSON.parse(initialData) as Application;
 
   const [platform, setPlatform] = useState<"windows" | "mac">(() =>
     app.platforms.includes("macos") ? "mac" : "windows"
