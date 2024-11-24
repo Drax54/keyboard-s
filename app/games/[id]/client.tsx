@@ -542,6 +542,7 @@
 
 //app/games/[id]/client.tsx
 // app/games/[id]/client.tsx
+
 "use client";
 
 import { useState } from "react";
@@ -596,12 +597,13 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
   };
 
   return (
-    <div className="flex gap-8">
+    <div className="flex flex-col lg:flex-row lg:gap-8 gap-4 p-4 lg:p-8">
+      {/* Main Content */}
       <div className="flex-1">
         <div className="py-5">
           {/* Header Section */}
-          <div className="flex items-start gap-10 mb-8">
-            <div className="relative w-20 h-20 shrink-0 bg-gray-100 rounded-lg p-2">
+          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10 mb-8">
+            <div className="relative w-24 h-24 sm:w-20 sm:h-20 shrink-0 bg-gray-100 rounded-lg p-2 mx-auto sm:mx-0">
               <img
                 src={game.icon}
                 alt={game.name}
@@ -610,11 +612,12 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
                 decoding="sync"
               />
             </div>
-
-            <div className="flex-1">
-              <div className="flex items-center justify-between mb-4">
-                <h1 className="text-4xl font-bold tracking-tight">{game.name}</h1>
-                <div className="flex gap-2">
+            <div className="flex-1 text-center sm:text-left">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
+                <h1 className="text-2xl sm:text-4xl font-bold tracking-tight">
+                  {game.name}
+                </h1>
+                <div className="flex gap-2 justify-center sm:justify-start">
                   {/* Windows Button */}
                   <button
                     onClick={() => isWindowsAvailable && setGlobalPlatform("windows")}
@@ -623,7 +626,10 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
                       globalPlatform === "windows"
                         ? "bg-blue-600 text-white"
                         : "bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600"
-                    } ${!isWindowsAvailable && "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
+                    } ${
+                      !isWindowsAvailable &&
+                      "bg-gray-200 text-gray-400 cursor-not-allowed"
+                    }`}
                   >
                     <img
                       src="https://api.iconify.design/bi:windows.svg"
@@ -641,7 +647,10 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
                       globalPlatform === "mac"
                         ? "bg-gray-500 text-white"
                         : "bg-gray-100 text-gray-700 hover:bg-gray-300 hover:text-gray-800"
-                    } ${!isMacAvailable && "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
+                    } ${
+                      !isMacAvailable &&
+                      "bg-gray-200 text-gray-400 cursor-not-allowed"
+                    }`}
                   >
                     <img
                       src="https://api.iconify.design/bi:apple.svg"
@@ -652,7 +661,9 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
                   </button>
                 </div>
               </div>
-              <p className="text-gray-500">{game.description}</p>
+              <p className="text-gray-500 text-sm sm:text-base">
+                {game.description}
+              </p>
             </div>
           </div>
 
@@ -699,12 +710,15 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
       </div>
 
       {/* Sidebar */}
-      <UnifiedSidebar
-        sections={game.groups.map((group: ShortcutGroupType) => ({
-          id: group.title.toLowerCase().replace(/\s+/g, "-"),
-          title: group.title,
-        }))}
-      />
+      <div className="lg:w-64 w-full">
+        <UnifiedSidebar
+          sections={game.groups.map((group: ShortcutGroupType) => ({
+            id: group.title.toLowerCase().replace(/\s+/g, "-"),
+            title: group.title,
+          }))}
+        />
+      </div>
     </div>
   );
 }
+

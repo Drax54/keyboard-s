@@ -688,16 +688,16 @@ export default function SoftwarePage() {
   const [isFocused, setIsFocused] = useState(false);
 
   const filteredApps = searchQuery
-    ? applicationsArray.filter(app => 
-        app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        app.description.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+    ? applicationsArray.filter(app =>
+      app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      app.description.toLowerCase().includes(searchQuery.toLowerCase())
+    )
     : applicationsArray;
 
   return (
-    <div className="py-10">
+    <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
       {/* Header Section with Search */}
-      <div className="flex justify-between items-start mb-12">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-8 sm:mb-12">
         {/* Title and Description */}
         <div className="flex items-start gap-4">
           <Command className="h-12 w-12" />
@@ -711,17 +711,17 @@ export default function SoftwarePage() {
 
         {/* Enhanced Search Bar */}
         <div className="relative w-72 group">
-          <div 
+          <div
             className={cn(
               "relative flex items-center transition-all duration-300",
               isFocused && "scale-105"
             )}
           >
-            <Search 
+            <Search
               className={cn(
                 "absolute left-3 w-5 h-5 transition-all duration-300",
                 isFocused ? "text-blue-500" : "text-gray-400"
-              )} 
+              )}
             />
             <input
               type="text"
@@ -754,7 +754,7 @@ export default function SoftwarePage() {
               </button>
             )}
           </div>
-          
+
           {/* Search Results Count */}
           {searchQuery && (
             <div className="absolute -bottom-6 left-0 text-sm text-gray-500 transition-opacity">
@@ -781,8 +781,8 @@ export default function SoftwarePage() {
                     />
                   </div>
                   <div>
-                    <h2 className="font-semibold">{app.name}</h2>
-                    <p className="text-base text-muted-foreground line-clamp-2">
+                    <h2 className="font-semibold text-base sm:text-lg truncate">{app.name}</h2>
+                    <p className="text-sm sm:text-base text-muted-foreground line-clamp-2">
                       {app.description}
                     </p>
                   </div>

@@ -1123,9 +1123,6 @@
 
 // data/applications.ts
 
-
-// types/application.d.ts
-
 export interface BaseItem {
   id: string;
   name: string;
@@ -1160,7 +1157,7 @@ export const applications = {
   "microsoft-word": {
     id: "microsoft-word",
     name: "Microsoft Word",
-    icon: "/icons/software/microsoft-word.png",
+    icon: "/icons/software/microsoft-word.svg",
     description: "Comprehensive shortcuts for creating and editing documents",
     platforms: ["windows", "macos"],
     featured: true,

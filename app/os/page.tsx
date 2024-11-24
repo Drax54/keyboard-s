@@ -79,9 +79,6 @@
 
 
 
-
-
-// app/os/page.tsx
 "use client";
 
 import { useState } from "react";
@@ -91,7 +88,6 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { operatingSystems as osData } from "@/data/operating-systems";
 
-// Pre-compute the OS array
 const operatingSystemsArray = Object.values(osData);
 
 export default function OSPage() {
@@ -106,22 +102,22 @@ export default function OSPage() {
     : operatingSystemsArray;
 
   return (
-    <div className="py-10">
+    <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
       {/* Header Section with Search */}
-      <div className="flex justify-between items-start mb-12">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-8 sm:mb-12">
         {/* Title and Description */}
         <div className="flex items-start gap-4">
-          <Monitor className="h-12 w-12" />
+          <Monitor className="h-8 w-8 sm:h-12 sm:w-12 text-500 shrink-0" />
           <div>
-            <h1 className="text-3xl font-bold">Operating System Shortcuts</h1>
-            <p className="text-gray-500 text-lg">
+            <h1 className="text-2xl sm:text-3xl font-bold truncate">Operating System Shortcuts</h1>
+            <p className="text-gray-500 text-sm sm:text-base md:text-lg">
               Essential keyboard shortcuts for different operating systems
             </p>
           </div>
         </div>
 
         {/* Enhanced Search Bar */}
-        <div className="relative w-72 group">
+        <div className="w-full sm:w-72 group">
           <div 
             className={cn(
               "relative flex items-center transition-all duration-300",
@@ -168,7 +164,7 @@ export default function OSPage() {
           
           {/* Search Results Count */}
           {searchQuery && (
-            <div className="absolute -bottom-6 left-0 text-sm text-gray-500 transition-opacity">
+            <div className="text-sm text-gray-500 mt-2 sm:absolute sm:-bottom-6 sm:left-0">
               {filteredOS.length} result{filteredOS.length !== 1 ? 's' : ''}
             </div>
           )}
@@ -176,13 +172,13 @@ export default function OSPage() {
       </div>
 
       {/* Grid Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {filteredOS.length > 0 ? (
           filteredOS.map((os) => (
             <Link key={os.id} href={`/os/${os.id}`}>
-              <Card className="p-6 hover:shadow-lg transition-shadow">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 shrink-0">
+              <Card className="p-4 sm:p-6 hover:shadow-lg transition-shadow">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 shrink-0">
                     <img
                       src={os.icon}
                       alt={os.name}
@@ -191,9 +187,11 @@ export default function OSPage() {
                       decoding="sync"
                     />
                   </div>
-                  <div>
-                    <h2 className="font-semibold">{os.name}</h2>
-                    <p className="text-base text-muted-foreground">
+                  <div className="min-w-0">
+                    <h2 className="font-semibold text-base sm:text-lg truncate">
+                      {os.name}
+                    </h2>
+                    <p className="text-sm sm:text-base text-muted-foreground line-clamp-2">
                       {os.description}
                     </p>
                   </div>
@@ -202,7 +200,7 @@ export default function OSPage() {
             </Link>
           ))
         ) : (
-          <p className="text-center text-gray-500 col-span-full">
+          <p className="text-center text-gray-500 col-span-full py-8">
             No operating systems found matching your search.
           </p>
         )}

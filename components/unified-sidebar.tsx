@@ -405,9 +405,7 @@
 
 
 
-
-
-
+// components/unified-sidebar.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -424,7 +422,6 @@ export function UnifiedSidebar({ sections = [] }: UnifiedSidebarProps) {
   const [headerHeight, setHeaderHeight] = useState(0);
 
   useEffect(() => {
-    // Ensure this runs only in the browser
     if (typeof window !== "undefined") {
       const header = document.querySelector("header");
       setHeaderHeight(header?.offsetHeight || 80);
@@ -465,7 +462,6 @@ export function UnifiedSidebar({ sections = [] }: UnifiedSidebarProps) {
     }
   };
 
-  // Check if we're on a detail page
   const isDetailPage =
     pathname.split("/").length > 2 &&
     (pathname.startsWith("/software/") ||
@@ -479,7 +475,8 @@ export function UnifiedSidebar({ sections = [] }: UnifiedSidebarProps) {
   }
 
   return (
-    <div className="w-64 bg-background">
+    <div className="hidden lg:block w-64 bg-background">
+      {/* Sidebar Container */}
       <div
         className="sticky"
         style={{

@@ -153,7 +153,6 @@
 // }
 
 // app/websites/page.tsx
-
 "use client";
 
 import { useState } from "react";
@@ -163,7 +162,6 @@ import { websites as websitesData } from "@/data/websites";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-// Pre-compute the websites array
 const websitesArray = Array.isArray(websitesData)
   ? websitesData
   : Object.values(websitesData);
@@ -180,22 +178,22 @@ export default function WebsitesPage() {
     : websitesArray;
 
   return (
-    <div className="py-10">
+    <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
       {/* Header Section with Search */}
-      <div className="flex justify-between items-start mb-12">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-8 sm:mb-12">
         {/* Title and Description */}
         <div className="flex items-start gap-4">
-          <Globe className="h-12 w-12 text-500" />
+          <Globe className="h-8 w-8 sm:h-12 sm:w-12 text-500 shrink-0" />
           <div>
-            <h1 className="text-3xl font-bold">Website Shortcuts</h1>
-            <p className="text-gray-500 text-lg">
+            <h1 className="text-2xl sm:text-3xl font-bold truncate">Website Shortcuts</h1>
+            <p className="text-gray-500 text-sm sm:text-base md:text-lg">
               Keyboard shortcuts for popular websites and web applications
             </p>
           </div>
         </div>
 
         {/* Enhanced Search Bar */}
-        <div className="relative w-72 group">
+        <div className="w-full sm:w-72 group">
           <div
             className={cn(
               "relative flex items-center transition-all duration-300",
@@ -219,7 +217,7 @@ export default function WebsitesPage() {
                 "w-full pl-10 pr-4 py-2.5 border rounded-lg",
                 "bg-white/80 backdrop-blur-sm",
                 "transition-all duration-300 ease-in-out",
-                "placeholder:text-gray-400 placeholder:transition-opacity",
+                "placeholder:text-gray-400 placeholder:transition-opacity text-sm sm:text-base",
                 "focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500",
                 isFocused ? "shadow-lg border-blue-500" : "border-gray-200 shadow-sm",
                 "hover:border-gray-300"
@@ -242,7 +240,7 @@ export default function WebsitesPage() {
 
           {/* Search Results Count */}
           {searchQuery && (
-            <div className="absolute -bottom-6 left-0 text-sm text-gray-500 transition-opacity">
+            <div className="text-sm text-gray-500 mt-2 sm:absolute sm:-bottom-6 sm:left-0">
               {filteredWebsites.length} result{filteredWebsites.length !== 1 ? 's' : ''}
             </div>
           )}
@@ -250,13 +248,13 @@ export default function WebsitesPage() {
       </div>
 
       {/* Grid Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {filteredWebsites.length > 0 ? (
           filteredWebsites.map((site) => (
             <Link key={site.id} href={`/websites/${site.id}`}>
-              <Card className="p-6 hover:shadow-lg transition-shadow">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 shrink-0">
+              <Card className="p-4 sm:p-6 hover:shadow-lg transition-shadow">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 shrink-0">
                     <img
                       src={site.icon}
                       alt={site.name}
@@ -265,9 +263,11 @@ export default function WebsitesPage() {
                       decoding="sync"
                     />
                   </div>
-                  <div>
-                    <h2 className="font-semibold">{site.name}</h2>
-                    <p className="text-base text-muted-foreground line-clamp-2">
+                  <div className="min-w-0">
+                    <h2 className="font-semibold text-base sm:text-lg truncate">
+                      {site.name}
+                    </h2>
+                    <p className="text-sm sm:text-base text-muted-foreground line-clamp-2">
                       {site.description}
                     </p>
                   </div>
@@ -276,7 +276,7 @@ export default function WebsitesPage() {
             </Link>
           ))
         ) : (
-          <p className="text-center text-gray-500 col-span-full">
+          <p className="text-center text-gray-500 col-span-full py-8">
             No websites found matching your search.
           </p>
         )}

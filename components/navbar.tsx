@@ -152,11 +152,9 @@
 
 
 
-
-
 "use client";
 
-import { Command, Keyboard, Moon, Sun, Search } from "lucide-react";
+import { Command, Keyboard, Moon, Sun, Search, Menu } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useState } from "react";
@@ -168,6 +166,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
 interface NavbarProps {
   onSearch?: (query: string) => void;
@@ -176,6 +175,7 @@ interface NavbarProps {
 export default function Navbar({ onSearch }: NavbarProps) {
   const { setTheme, theme } = useTheme();
   const [searchQuery, setSearchQuery] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value.toLowerCase();
@@ -185,13 +185,25 @@ export default function Navbar({ onSearch }: NavbarProps) {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="max-w-7xl mx-auto px-6 py-6">
-        {/* Logo and Navigation */}
-        <div className="flex items-center gap-8">
-          <Link href="/" replace className="flex items-center gap-2 hover:opacity-90">
-            <Keyboard className="h-6 w-6" />
-            <span className="font-bold text-lg">KeyMaster</span>
-          </Link>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+        {/* Logo */}
+        <Link href="/" replace className="flex items-center gap-2 hover:opacity-90">
+          <Keyboard className="h-6 w-6" />
+          <span className="font-bold text-lg">KeyMaster</span>
+        </Link>
+
+        {/* Hamburger Menu for Mobile */}
+        <div className="lg:hidden">
+          <button
+            className="p-2 rounded-md text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+        </div>
+
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-8">
           <NavigationMenu>
             <NavigationMenuList className="gap-2">
               <NavigationMenuItem>
@@ -230,30 +242,16 @@ export default function Navbar({ onSearch }: NavbarProps) {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/submit-shortcut" legacyBehavior passHref>
+                {/* <Link href="/submit-shortcut" legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Submit a Shortcut
+                    Submit a Shortcut
                   </NavigationMenuLink>
-                </Link>
+                </Link> */}
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-        </div>
 
-        {/* Search Bar */}
-        {/* <div className="relative flex items-center">
-          <Search className="absolute left-3 text-gray-400 h-5 w-5" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={handleSearch}
-            placeholder="Search..."
-            className="pl-10 pr-4 py-2 w-72 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          />
-        </div> */}
-
-        {/* Theme Toggle */}
-        {/* <div>
+          {/* Theme Toggle */}
           <Button
             variant="ghost"
             size="icon"
@@ -264,8 +262,45 @@ export default function Navbar({ onSearch }: NavbarProps) {
             <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             <span className="sr-only">Toggle theme</span>
           </Button>
-        </div> */}
+        </div>
       </div>
+
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div className="lg:hidden border-t bg-background">
+          <nav className="flex flex-col p-4 gap-4">
+            <Link href="/software" className="text-gray-700 hover:text-blue-600">
+              Software
+            </Link>
+            <Link href="/os" className="text-gray-700 hover:text-blue-600">
+              Operating Systems
+            </Link>
+            <Link href="/games" className="text-gray-700 hover:text-blue-600">
+              Games
+            </Link>
+            <Link href="/websites" className="text-gray-700 hover:text-blue-600">
+              Websites
+            </Link>
+            <Link href="/browsers" className="text-gray-700 hover:text-blue-600">
+              Browsers
+            </Link>
+            {/* <Link href="/submit-shortcut" className="text-gray-700 hover:text-blue-600">
+              Submit a Shortcut
+            </Link> */}
+            <button
+              className="flex items-center gap-2 mt-4 text-gray-700 hover:text-blue-600"
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            >
+              {theme === "light" ? (
+                <Moon className="h-5 w-5" />
+              ) : (
+                <Sun className="h-5 w-5" />
+              )}
+              <span>Toggle Theme</span>
+            </button>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

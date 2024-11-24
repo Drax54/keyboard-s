@@ -74,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="relative min-h-screen flex flex-col">
               <Navbar />
               <div className="flex-1 flex w-full max-w-screen-xl mx-auto">
-                <main className="flex-1 transition-all duration-200 ease-in-out px-6 py-8">
+                <main className="flex-1 transition-all duration-200 ease-in-out px-4 sm:px-6 py-8">
                   {children}
                 </main>
                 <SidebarWrapper />

@@ -284,7 +284,7 @@
 
 
 // // // components/shortcut-card.tsx
-"use client";
+// "use client";
 
 // import { Shortcut } from "@/types/shortcut";
 // import { Card } from "@/components/ui/card";
@@ -393,7 +393,7 @@
 
 
 
-
+// // // components/shortcut-card.tsx
 
 "use client";
 
@@ -413,32 +413,35 @@ export function ShortcutCard({
   const displayKeys = isUniversal
     ? shortcut.platforms.universal
     : shortcut.platforms?.[platform]
-      ? shortcut.platforms[platform]
-      : shortcut.keys || [];
+    ? shortcut.platforms[platform]
+    : shortcut.keys || [];
 
   return (
-    <Card className="p-6 transition-shadow hover:shadow-md hover:bg-accent rounded-lg">
-      <div className="flex items-center justify-between gap-6">
+    <Card className="p-4 sm:p-6 transition-shadow hover:shadow-md hover:bg-accent rounded-lg">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         {/* Shortcut Description */}
-        <p className="text-lg font-light flex-1">{shortcut.description}</p>
+        <p className="text-base sm:text-lg font-light flex-1">
+          {shortcut.description}
+        </p>
 
         {/* Shortcut Keys & Platform Buttons */}
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           {/* Render Shortcut Keys */}
-          <div className="flex gap-2">
-            {displayKeys && displayKeys.map((key, index) => (
-              <kbd
-                key={index}
-                className="px-2.5 py-1.5 text-sm font-semibold bg-secondary border rounded-md transition-colors"
-              >
-                {key}
-              </kbd>
-            ))}
+          <div className="flex flex-wrap gap-2">
+            {displayKeys &&
+              displayKeys.map((key, index) => (
+                <kbd
+                  key={index}
+                  className="px-2 py-1 sm:px-2.5 sm:py-1.5 text-sm sm:text-base font-semibold bg-secondary border rounded-md transition-colors"
+                >
+                  {key}
+                </kbd>
+              ))}
           </div>
 
           {/* Platform Buttons */}
           {isUniversal ? (
-            <span className="text-sm font-semibold text-muted-foreground">
+            <span className="text-sm sm:text-base font-semibold text-muted-foreground">
               Universal
             </span>
           ) : (
@@ -450,16 +453,16 @@ export function ShortcutCard({
                     type="button"
                     onClick={() => setPlatform("windows")}
                     className={cn(
-                      "p-2 rounded-md transition-colors",
+                      "p-2 sm:p-3 rounded-md transition-colors",
                       platform === "windows"
                         ? "bg-blue-600 text-white" // Blue background with white icon
                         : "bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600"
                     )}
                     title="Windows shortcuts"
                   >
-                    <svg className="h-4 w-4" viewBox="0 0 24 24">
+                    <svg className="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24">
                       <path
-                        fill="currentColor" /* Windows icon remains white */
+                        fill="currentColor"
                         d="M3 12V6.75l6-1.32v6.48L3 12m17-9v8.75l-10 .15V5.21L20 3M3 13l6 .09v6.81l-6-1.15V13m17 .25V22l-10-1.91V13.1l10 .15Z"
                       />
                     </svg>
@@ -472,14 +475,14 @@ export function ShortcutCard({
                     type="button"
                     onClick={() => setPlatform("mac")}
                     className={cn(
-                      "p-2 rounded-md transition-colors",
+                      "p-2 sm:p-3 rounded-md transition-colors",
                       platform === "mac"
                         ? "bg-gray-500 text-white" // Gray background with white icon for macOS
                         : "bg-gray-100 text-gray-700 hover:bg-gray-300 hover:text-gray-800"
                     )}
                     title="macOS shortcuts"
                   >
-                    <Apple className="h-4 w-4" />
+                    <Apple className="h-4 w-4 sm:h-5 sm:w-5" />
                   </button>
                 )}
               </div>

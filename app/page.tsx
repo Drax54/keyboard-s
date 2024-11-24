@@ -668,7 +668,7 @@ export default function Home() {
 
   const operatingSystemsArray = Object.values(operatingSystems)
     .filter(isValidApplication)
-    .filter(item => !item.featured);
+    .filter(item => !!item.featured);
 
   const applicationsArray = Object.values(applications)
     .filter(isValidApplication)

@@ -18,18 +18,18 @@ export default function BrowsersPage() {
 
   const filteredBrowsers = searchQuery
     ? browsersArray.filter(browser =>
-        browser.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        browser.description.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+      browser.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      browser.description.toLowerCase().includes(searchQuery.toLowerCase())
+    )
     : browsersArray;
 
   return (
-    <div className="py-10">
+    <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
       {/* Header Section with Search */}
-      <div className="flex justify-between items-start mb-12">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-8 sm:mb-12">
         {/* Title and Description */}
         <div className="flex items-start gap-4">
-        <Chrome className="h-12 w-12 text-500" />
+          <Chrome className="h-12 w-12 text-500" />
           <div>
             <h1 className="text-3xl font-bold">Browser Shortcuts</h1>
             <p className="text-gray-500 text-lg">
@@ -110,8 +110,10 @@ export default function BrowsersPage() {
                     />
                   </div>
                   <div>
-                    <h2 className="font-semibold">{browser.name}</h2>
-                    <p className="text-base text-muted-foreground line-clamp-2">
+
+            
+                    <h2 className="font-semibold text-base sm:text-lg truncate">{browser.name}</h2>
+                    <p className="text-sm sm:text-base text-muted-foreground line-clamp-2">
                       {browser.description}
                     </p>
                   </div>

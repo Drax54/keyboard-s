@@ -1,3 +1,6 @@
+// data/types.ts
+
+
 export interface BaseItem {
     id: string;
     name: string;

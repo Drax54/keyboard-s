@@ -647,7 +647,7 @@ export const browsers = {
     "uc-browser": {
         "id": "uc-browser",
         "name": "UC Browser",
-        "icon": "https://example.com/uc_browser_icon.svg",
+        "icon": "/icons/browsers/uc-browser.svg",
         "description": "Shortcuts for UC Browser - Updated for MacOS and Windows OS",
         "platforms": [
             "windows",
