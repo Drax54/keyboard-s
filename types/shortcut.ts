@@ -22,6 +22,36 @@
 //   groups: ShortcutGroup[];
 // }
 
+//types/shortcut.ts
+
+
+// types.ts
+export interface CategoryItem {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  featured?: boolean;
+  platforms?: ReadonlyArray<string>;
+  groups?: ReadonlyArray<{
+    title: string;
+    shortcuts: ReadonlyArray<{
+      id: string;
+      description: string;
+      keys: ReadonlyArray<string>;
+      platforms?: {
+        windows?: ReadonlyArray<string>;
+        mac?: ReadonlyArray<string>;
+      };
+    }>;
+  }>;
+}
+
+// Define a new type for the entire data structure
+export type CategoryItems = {
+  [key: string]: CategoryItem; // Object with unique keys mapping to CategoryItem
+};
+
 
 
 export interface ShortcutPlatforms {

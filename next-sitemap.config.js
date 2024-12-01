@@ -33,31 +33,32 @@
 // };
 
 
-
-
 const { generateAllStaticParams } = require('./lib/staticParams');
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'http://localhost:3000',
+  siteUrl: process.env.SITE_URL || 'https://boostmykey.com',
   generateRobotsTxt: true,
   sitemapSize: 7000,
   generateIndexSitemap: true,
   changefreq: 'daily',
-  priority: 0.7, // Default priority for pages
-  exclude: ['/404', '/api/*'], // Exclude paths if necessary
+  priority: 0.7,
+  outDir: './out', 
+  exclude: ['/404', '/api/*', '/submit-shortcut'],
   robotsTxtOptions: {
     policies: [{ userAgent: '*', allow: '/' }],
   },
   additionalPaths: async (config) => {
-    const allPaths = generateAllStaticParams().map((param) => ({
-      loc: `/${param.category}/${param.id}`, // Combine category and ID to form path
-      changefreq: 'weekly',                // Default frequency
-      priority: 0.8,                       // Default priority
-      lastmod: new Date().toISOString(),   // Add the current date
+    const staticPaths = generateAllStaticParams();
+    console.log('Static paths for sitemap:', staticPaths); // Debugging
+
+    const additionalPaths = staticPaths.map(({ category, id }) => ({
+      loc: `/${category}/${id}`,
+      changefreq: 'weekly',
+      priority: 0.8,
+      lastmod: new Date().toISOString(),
     }));
 
-    // Add static category overview pages
     const categoryPaths = [
       { loc: '/software', changefreq: 'daily', priority: 0.8, lastmod: new Date().toISOString() },
       { loc: '/browsers', changefreq: 'daily', priority: 0.8, lastmod: new Date().toISOString() },
@@ -65,12 +66,6 @@ module.exports = {
       { loc: '/websites', changefreq: 'daily', priority: 0.8, lastmod: new Date().toISOString() },
     ];
 
-    return [...allPaths, ...categoryPaths]; // Combine all paths and category overview pages
+    return [...additionalPaths, ...categoryPaths];
   },
 };
-
-
-
-
-
-

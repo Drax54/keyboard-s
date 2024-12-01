@@ -225,6 +225,7 @@
 //     );
 // }
 
+// // app/browsers/[id]/client.tsx
 
 
 "use client";
@@ -233,44 +234,49 @@ import { useState } from "react";
 import { ShortcutGroup } from "@/components/shortcut-group";
 import { Search } from "lucide-react";
 import { UnifiedSidebar } from "@/components/unified-sidebar";
-import { ShortcutGroup as ShortcutGroupType } from "@/types/shortcut";
+import { CategoryItem, ShortcutGroup as ShortcutGroupType } from "@/data/types";;
+import { browsers } from "@/data/browsers"; // Import browsers data
+import Link from "next/link";
+
 
 interface BrowserPageClientProps {
   initialData: string;
+  relatedBrowsers: ReadonlyArray<CategoryItem>;
 }
 
-export function BrowserShortcutPageClient({ initialData }: BrowserPageClientProps) {
-  const browser = JSON.parse(initialData);
+export function BrowserShortcutPageClient({ initialData, relatedBrowsers }: BrowserPageClientProps) {
+  const browser = JSON.parse(initialData) as CategoryItem;
 
-  // Ensure `platforms` is a valid array to prevent runtime issues
-  const platforms: string[] = browser.platforms || [];
-
-  // Determine platform availability
+  const platforms: ReadonlyArray<string> = browser.platforms || [];
   const isWindowsAvailable = platforms.includes("windows");
   const isMacAvailable = platforms.includes("macos");
 
   const [platform, setPlatform] = useState<"windows" | "mac">(() =>
     isMacAvailable ? "mac" : "windows"
   );
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredGroups, setFilteredGroups] = useState<ShortcutGroupType[]>(() => browser.groups);
 
-  const sections = browser.groups?.map((group: ShortcutGroupType) => ({
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const [filteredGroups, setFilteredGroups] = useState<ShortcutGroupType[]>(
+    () => (browser.groups || []) as ShortcutGroupType[]
+  );
+
+  const sections = (browser.groups || []).map((group) => ({
     id: group.title.toLowerCase().replace(/\s+/g, "-"),
     title: group.title,
-  })) || [];
+  }));
 
   const handleSearch = (query: string) => {
     const lowerCaseQuery = query.toLowerCase();
     setSearchQuery(query);
 
     if (!query) {
-      setFilteredGroups(browser.groups);
+      setFilteredGroups((browser.groups || []) as ShortcutGroupType[]);
       return;
     }
 
-    const newFilteredGroups = browser.groups
-      .map((group: ShortcutGroupType) => ({
+    const newFilteredGroups = (browser.groups || [])
+      .map((group) => ({
         ...group,
         shortcuts: group.shortcuts.filter(
           (shortcut) =>
@@ -278,17 +284,18 @@ export function BrowserShortcutPageClient({ initialData }: BrowserPageClientProp
             shortcut.keys.join(" ").toLowerCase().includes(lowerCaseQuery)
         ),
       }))
-      .filter((group: ShortcutGroupType) => group.shortcuts.length > 0);
+      .filter((group) => group.shortcuts.length > 0) as ShortcutGroupType[];
 
     setFilteredGroups(newFilteredGroups);
   };
+
 
   return (
     <div className="flex flex-col lg:flex-row gap-8">
       <div className="flex-1 px-4 sm:px-6 lg:px-8">
         <div className="py-5">
           {/* Header Section */}
-          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10 mb-8">
+          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-6 mb-8">
             <div className="relative w-24 h-24 sm:w-20 sm:h-20 shrink-0 bg-gray-100 rounded-lg p-2 mx-auto sm:mx-0">
               <img
                 src={browser.icon}
@@ -301,19 +308,20 @@ export function BrowserShortcutPageClient({ initialData }: BrowserPageClientProp
 
             <div className="flex-1">
               <div className="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-4 mb-4">
-                <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-center sm:text-left">
-                  {browser.name}
+                {/* H1 Section */}
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-center sm:text-left flex-1 max-w-lg">
+                  {browser.shortcutpageName}
                 </h1>
-                <div className="flex gap-2 w-full sm:w-auto justify-center sm:justify-start">
-                  {/* Windows Button */}
+
+                {/* Buttons Section */}
+                <div className="flex gap-2 w-full sm:w-auto justify-center sm:justify-end sm:items-center">
                   <button
                     onClick={() => isWindowsAvailable && setPlatform("windows")}
                     disabled={!isWindowsAvailable}
-                    className={`px-4 py-2 rounded-lg flex items-center gap-2 transition duration-200 ${
-                      platform === "windows"
-                        ? "bg-blue-600 text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600"
-                    } ${!isWindowsAvailable && "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
+                    className={`px-4 py-2 rounded-lg flex items-center gap-2 transition duration-200 ${platform === "windows"
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+                      } ${!isWindowsAvailable && "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
                   >
                     <img
                       src="https://api.iconify.design/bi:windows.svg"
@@ -322,16 +330,14 @@ export function BrowserShortcutPageClient({ initialData }: BrowserPageClientProp
                     />
                     <span>Windows</span>
                   </button>
-
                   {/* macOS Button */}
                   <button
                     onClick={() => isMacAvailable && setPlatform("mac")}
                     disabled={!isMacAvailable}
-                    className={`px-4 py-2 rounded-lg flex items-center gap-2 transition duration-200 ${
-                      platform === "mac"
-                        ? "bg-gray-500 text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-300 hover:text-gray-800"
-                    } ${!isMacAvailable && "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
+                    className={`px-4 py-2 rounded-lg flex items-center gap-2 transition duration-200 ${platform === "mac"
+                      ? "bg-gray-500 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-300 hover:text-gray-800"
+                      } ${!isMacAvailable && "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
                   >
                     <img
                       src="https://api.iconify.design/bi:apple.svg"
@@ -342,11 +348,32 @@ export function BrowserShortcutPageClient({ initialData }: BrowserPageClientProp
                   </button>
                 </div>
               </div>
+
+              {/* Description Section */}
               <p className="text-gray-500 text-sm sm:text-base text-center sm:text-left">
                 {browser.description}
               </p>
+              {/* Description Section */}
+
+
+              {/* Official URL Section */}
+              {browser.officialURL && (
+                <p className="text-gray-500 text-sm sm:text-base text-center sm:text-left mt-2">
+                  Official URL:{" "}
+                  <a
+                    href={browser.officialURL}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    className="text-blue-600 hover:underline"
+                  >
+                    {browser.officialURL}
+                  </a>
+                </p>
+              )}
             </div>
           </div>
+
+
 
           {/* Search Bar */}
           <div className="relative mb-6">
@@ -375,7 +402,7 @@ export function BrowserShortcutPageClient({ initialData }: BrowserPageClientProp
                   </h2>
                   <ShortcutGroup
                     key={group.title}
-                    group={group}
+                    group={group as ShortcutGroupType} // Explicitly cast group to ShortcutGroupType
                     platform={platform}
                     setPlatform={setPlatform}
                     isWindowsAvailable={isWindowsAvailable}
@@ -387,11 +414,57 @@ export function BrowserShortcutPageClient({ initialData }: BrowserPageClientProp
               <p className="text-gray-500">No shortcuts match your search.</p>
             )}
           </div>
+
+          {/* Related Browsers Section */}
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold mb-6">Related Browsers</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {relatedBrowsers.map((relatedBrowser) => (
+                <Link
+                  key={relatedBrowser.id}
+                  href={`/browsers/${relatedBrowser.id}`}
+                  className="bg-gray-100 p-4 rounded-lg shadow hover:shadow-lg transition"
+                >
+                  <div className="cursor-pointer">
+                    <img
+                      src={relatedBrowser.icon}
+                      alt={relatedBrowser.name}
+                      className="w-16 h-16 mx-auto mb-4"
+                    />
+                    <h3 className="text-lg font-semibold text-center">
+                      {relatedBrowser.name}
+                    </h3>
+                    <p className="text-gray-500 text-sm text-center">
+                      {relatedBrowser.description}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
-
       {/* Sidebar */}
-      <UnifiedSidebar sections={sections} />
-    </div>
+      <UnifiedSidebar
+        sections={sections}
+        details={{
+          name: browser.name, // Dynamically add browser name
+          description: browser.description, // Dynamically add browser description
+        }}
+        popularItems={Object.values(browsers)
+          .filter((b) => b.id !== browser.id) // Exclude the current browser
+          .sort(() => 0.5 - Math.random()) // Shuffle the array
+          .slice(0, 5) // Select the top 5
+          .map((b) => ({
+            id: b.id,
+            name: b.name,
+            icon: b.icon,
+            link: `/browsers/${b.id}`, // Generate the link
+          }))}
+      />
+
+
+    </div >
   );
 }

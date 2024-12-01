@@ -128,7 +128,7 @@
 // components/shortcut-group.tsx
 "use client";
 
-import { ShortcutGroup as ShortcutGroupType } from "@/types/shortcut";
+import { ShortcutGroup as ShortcutGroupType } from "@/data/types";
 import { ShortcutCard } from "./shortcut-card";
 
 interface ShortcutGroupProps {

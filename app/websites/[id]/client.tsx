@@ -821,6 +821,9 @@ import { ShortcutGroup } from "@/components/shortcut-group";
 import { Search } from "lucide-react";
 import { UnifiedSidebar } from "@/components/unified-sidebar";
 import { ShortcutGroup as ShortcutGroupType } from "@/types/shortcut";
+import { websites } from "@/data/websites";
+import Link from "next/link";
+
 
 interface WebsitePageClientProps {
   initialData: string;
@@ -871,12 +874,19 @@ export function WebsitePageClient({ initialData }: WebsitePageClientProps) {
     setFilteredGroups(newFilteredGroups);
   };
 
+    // Generate random related browsers (excluding the current one)
+    const relatedWebsites = Object.values(websites)
+    .filter((b) => b.id !== website.id) // Exclude the current browser
+    .sort(() => 0.5 - Math.random()) // Shuffle the array
+    .slice(0, 3); // Select the top 3
+
+
   return (
     <div className="flex flex-col lg:flex-row gap-8">
       <div className="flex-1 px-4 sm:px-6 lg:px-8">
         <div className="py-5">
           {/* Header Section */}
-          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10 mb-8">
+          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-6 mb-8">
             <div className="relative w-24 h-24 sm:w-20 sm:h-20 shrink-0 bg-gray-100 rounded-lg p-2 mx-auto sm:mx-0">
               <img
                 src={website.icon}
@@ -888,8 +898,8 @@ export function WebsitePageClient({ initialData }: WebsitePageClientProps) {
             </div>
             <div className="flex-1">
               <div className="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-4 mb-4">
-                <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-center sm:text-left">
-                  {website.name}
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-center sm:text-left">
+                  {website.shortcutpageName}
                 </h1>
                 <div className="flex gap-2 w-full sm:w-auto justify-center sm:justify-start">
                   {/* Windows Button */}
@@ -973,6 +983,34 @@ export function WebsitePageClient({ initialData }: WebsitePageClientProps) {
             ) : (
               <p className="text-gray-500">No shortcuts match your search.</p>
             )}
+          </div>
+
+          
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold mb-6">Related Websites Keyboard Shortcuts</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {relatedWebsites.map((relatedWebsites) => (
+                <Link
+                  key={relatedWebsites.id}
+                  href={`/websites/${relatedWebsites.id}`}
+                  className="bg-gray-100 p-4 rounded-lg shadow hover:shadow-lg transition"
+                >
+                  <div className="cursor-pointer">
+                    <img
+                      src={relatedWebsites.icon}
+                      alt={relatedWebsites.name}
+                      className="w-16 h-16 mx-auto mb-4"
+                    />
+                    <h3 className="text-lg font-semibold text-center">
+                      {relatedWebsites.name}
+                    </h3>
+                    <p className="text-gray-500 text-sm text-center">
+                      {relatedWebsites.description}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>

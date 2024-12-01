@@ -100,21 +100,119 @@
 
 
 
+// import { games } from "@/data/games";
+// import { notFound } from "next/navigation";
+// import { GamePageClient } from "./client";
+
+// export const dynamic = "force-static";
+// export const revalidate = false;
+
+// // export async function generateStaticParams() {
+// //   return Object.keys(games).map((key) => ({
+// //     id: games[key].id,
+// //   }));
+// // }
+
+// type StaticParam = {
+//   id: string;
+// };
+
+// export function generateStaticParams(): StaticParam[] {
+//   if (typeof games !== "object") {
+//       throw new Error("browsers must be an object");
+//   }
+
+//   const gameIds = Object.keys(games);
+//   console.log("Generating static params for games:", gameIds);
+//   return gameIds.map((id) => ({ id }));
+// }
+
+
+// export default function GamePage({ params }: { params: { id: string } }) {
+//   const game = games[params.id];
+
+//   if (!game) {
+//     notFound();
+//   }
+
+//   return (
+//     <div className="container">
+//       <GamePageClient initialData={JSON.stringify(game)} />
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
 import { games } from "@/data/games";
 import { notFound } from "next/navigation";
 import { GamePageClient } from "./client";
+import type { Metadata } from "next";
 
 export const dynamic = "force-static";
 export const revalidate = false;
 
-export async function generateStaticParams() {
-  return Object.keys(games).map((key) => ({
-    id: games[key].id,
-  }));
+// Base URL configuration
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
+  (process.env.NODE_ENV === 'production' 
+    ? 'https://boostmykey.com' 
+    : 'http://localhost:3000');
+
+type GameId = keyof typeof games;
+type StaticParam = {
+  id: string;
+};
+
+// Generate static params for all games
+export function generateStaticParams(): StaticParam[] {
+  if (typeof games !== "object") {
+    throw new Error("games must be an object");
+  }
+  const gameIds = Object.keys(games);
+  console.log("Generating static params for games:", gameIds);
+  return gameIds.map((id) => ({ id }));
+}
+
+// Generate metadata for each game page
+export function generateMetadata({ params }: { params: { id: string } }): Metadata {
+  const game = games[params.id as GameId];
+
+  if (!game) {
+    return {
+      title: "Game Not Found",
+      description: "The requested game shortcuts could not be found.",
+      metadataBase: new URL(baseUrl),
+    };
+  }
+
+  return {
+    metadataBase: new URL(baseUrl),
+    title: `${game.shortcutpageName} Keyboard Shortcuts - Boost My Key`,
+    description: `${game.metadescription}`,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
+    },
+    alternates: {
+      canonical: `${baseUrl}/games/${game.id}`,
+    },
+  };
 }
 
 export default function GamePage({ params }: { params: { id: string } }) {
-  const game = games[params.id];
+  const game = games[params.id as GameId];
 
   if (!game) {
     notFound();

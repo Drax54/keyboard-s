@@ -154,6 +154,8 @@
 
 "use client";
 
+import Image from "next/image"; // Import Next.js Image component
+
 import { Command, Keyboard, Moon, Sun, Search, Menu } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
@@ -187,9 +189,26 @@ export default function Navbar({ onSearch }: NavbarProps) {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" replace className="flex items-center gap-2 hover:opacity-90">
-          <Keyboard className="h-6 w-6" />
-          <span className="font-bold text-lg">KeyMaster</span>
+        <Link
+          href="/"
+          replace
+          onClick={(e) => {
+            if (window.location.pathname === "/") {
+              e.preventDefault(); // Prevent the default navigation
+              window.location.reload(); // Reload the page
+            }
+          }}
+          className="flex items-center gap-2 hover:opacity-90"
+        >
+          {/* Set the logo image */}
+          <Image
+            src="/BoostMyKey.png" // Path relative to the public folder
+            alt="Boost My Key Logo"
+            width={220} // Adjust width as needed
+            height={600} // Adjust height as needed
+            className="h-120 w-150 object-contain" // Optional styling
+          />
+          {/* <span className="font-bold text-lg">Boost My Key</span> */}
         </Link>
 
         {/* Hamburger Menu for Mobile */}

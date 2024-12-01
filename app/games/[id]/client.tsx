@@ -550,6 +550,9 @@ import { ShortcutGroup } from "@/components/shortcut-group";
 import { Search } from "lucide-react";
 import { UnifiedSidebar } from "@/components/unified-sidebar";
 import { ShortcutGroup as ShortcutGroupType } from "@/types/shortcut";
+import { games } from "@/data/games";
+import Link from "next/link";
+
 
 interface GamePageClientProps {
   initialData: string;
@@ -558,14 +561,10 @@ interface GamePageClientProps {
 export function GamePageClient({ initialData }: GamePageClientProps) {
   const game = JSON.parse(initialData);
 
-  // Ensure `platforms` is a valid array to prevent runtime issues
   const platforms: string[] = game.platforms || [];
-
-  // Determine platform availability
   const isWindowsAvailable = platforms.includes("windows");
   const isMacAvailable = platforms.includes("macos");
 
-  // Global platform state
   const [globalPlatform, setGlobalPlatform] = useState<"windows" | "mac">(() =>
     isMacAvailable ? "mac" : "windows"
   );
@@ -596,13 +595,19 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
     setFilteredGroups(newFilteredGroups);
   };
 
+  // Generate random related browsers (excluding the current one)
+  const relatedGames = Object.values(games)
+    .filter((b) => b.id !== game.id) // Exclude the current browser
+    .sort(() => 0.5 - Math.random()) // Shuffle the array
+    .slice(0, 3); // Select the top 3
+
   return (
-    <div className="flex flex-col lg:flex-row lg:gap-8 gap-4 p-4 lg:p-8">
+    <div className="flex flex-col lg:flex-row gap-8">
       {/* Main Content */}
-      <div className="flex-1">
+      <div className="flex-1 px-4 sm:px-6 lg:px-8">
         <div className="py-5">
           {/* Header Section */}
-          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10 mb-8">
+          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-6 mb-8">
             <div className="relative w-24 h-24 sm:w-20 sm:h-20 shrink-0 bg-gray-100 rounded-lg p-2 mx-auto sm:mx-0">
               <img
                 src={game.icon}
@@ -612,24 +617,20 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
                 decoding="sync"
               />
             </div>
-            <div className="flex-1 text-center sm:text-left">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
-                <h1 className="text-2xl sm:text-4xl font-bold tracking-tight">
-                  {game.name}
+            <div className="flex-1">
+              <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-4 mb-4">
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-center sm:text-left">
+                  {game.shortcutpageName}
                 </h1>
-                <div className="flex gap-2 justify-center sm:justify-start">
+                <div className="flex gap-2 w-full sm:w-auto justify-center sm:justify-start">
                   {/* Windows Button */}
                   <button
                     onClick={() => isWindowsAvailable && setGlobalPlatform("windows")}
                     disabled={!isWindowsAvailable}
-                    className={`px-4 py-2 rounded-lg flex items-center gap-2 transition duration-200 ${
-                      globalPlatform === "windows"
+                    className={`px-4 py-2 rounded-lg flex items-center gap-2 transition duration-200 ${globalPlatform === "windows"
                         ? "bg-blue-600 text-white"
                         : "bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600"
-                    } ${
-                      !isWindowsAvailable &&
-                      "bg-gray-200 text-gray-400 cursor-not-allowed"
-                    }`}
+                      } ${!isWindowsAvailable && "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
                   >
                     <img
                       src="https://api.iconify.design/bi:windows.svg"
@@ -643,14 +644,10 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
                   <button
                     onClick={() => isMacAvailable && setGlobalPlatform("mac")}
                     disabled={!isMacAvailable}
-                    className={`px-4 py-2 rounded-lg flex items-center gap-2 transition duration-200 ${
-                      globalPlatform === "mac"
+                    className={`px-4 py-2 rounded-lg flex items-center gap-2 transition duration-200 ${globalPlatform === "mac"
                         ? "bg-gray-500 text-white"
                         : "bg-gray-100 text-gray-700 hover:bg-gray-300 hover:text-gray-800"
-                    } ${
-                      !isMacAvailable &&
-                      "bg-gray-200 text-gray-400 cursor-not-allowed"
-                    }`}
+                      } ${!isMacAvailable && "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
                   >
                     <img
                       src="https://api.iconify.design/bi:apple.svg"
@@ -661,7 +658,7 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
                   </button>
                 </div>
               </div>
-              <p className="text-gray-500 text-sm sm:text-base">
+              <p className="text-gray-500 text-sm sm:text-base text-center sm:text-left">
                 {game.description}
               </p>
             </div>
@@ -706,19 +703,45 @@ export function GamePageClient({ initialData }: GamePageClientProps) {
               <p className="text-gray-500">No shortcuts match your search.</p>
             )}
           </div>
+
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold mb-6">Related Games</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {relatedGames.map((relatedGames) => (
+                <Link
+                  key={relatedGames.id}
+                  href={`/games/${relatedGames.id}`}
+                  className="bg-gray-100 p-4 rounded-lg shadow hover:shadow-lg transition"
+                >
+                  <div className="cursor-pointer">
+                    <img
+                      src={relatedGames.icon}
+                      alt={relatedGames.name}
+                      className="w-16 h-16 mx-auto mb-4"
+                    />
+                    <h3 className="text-lg font-semibold text-center">
+                      {relatedGames.name}
+                    </h3>
+                    <p className="text-gray-500 text-sm text-center">
+                      {relatedGames.description}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
 
       {/* Sidebar */}
-      <div className="lg:w-64 w-full">
-        <UnifiedSidebar
-          sections={game.groups.map((group: ShortcutGroupType) => ({
-            id: group.title.toLowerCase().replace(/\s+/g, "-"),
-            title: group.title,
-          }))}
-        />
-      </div>
+      <UnifiedSidebar
+        sections={game.groups.map((group: ShortcutGroupType) => ({
+          id: group.title.toLowerCase().replace(/\s+/g, "-"),
+          title: group.title,
+        }))}
+      />
+
     </div>
   );
 }
-

@@ -605,18 +605,20 @@
 
 
 
-
+//app/page.tsx
 "use client";
 
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { applications } from "@/data/applications";
 import { games } from "@/data/games";
-import { operatingSystems } from "@/data/operating-systems";
+import { OperatingSystems } from "@/data/operating-systems";
 import { websites } from "@/data/websites";
 import { browsers } from "@/data/browsers";
 import Link from "next/link";
-import { BaseItem, CategoryCardProps } from "@/data/types";
+import { CategoryItem, CategoryCardProps } from "@/data/types";
+import Head from "next/head";
+
 
 function CategoryCard({ title, items, baseUrl }: CategoryCardProps) {
   return (
@@ -657,34 +659,25 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
 
   // Type guard
-  function isValidApplication(item: unknown): item is BaseItem  {
-    if (!item || typeof item !== 'object') return false;
-    const i = item as Partial<BaseItem >;
-    return typeof i.id === 'string' &&
-           typeof i.name === 'string' &&
-           typeof i.icon === 'string' &&
-           typeof i.description === 'string';
+  function isValidApplication(item: unknown): item is CategoryItem {
+    if (!item || typeof item !== "object") return false;
+    const i = item as Partial<CategoryItem>;
+    return (
+      typeof i.id === "string" &&
+      typeof i.name === "string" &&
+      typeof i.icon === "string" &&
+      typeof i.description === "string"
+    );
   }
 
-  const operatingSystemsArray = Object.values(operatingSystems)
-    .filter(isValidApplication)
-    .filter(item => !!item.featured);
-
-  const applicationsArray = Object.values(applications)
-    .filter(isValidApplication)
-    .filter(item => !!item.featured);
-
-  const gamesArray = Object.values(games)
-    .filter(isValidApplication)
-    .filter(item => !!item.featured);
-
-  const websitesArray = Object.values(websites)
-    .filter(isValidApplication)
-    .filter(item => !item.featured);
-
-  const browsersArray = Object.values(browsers)
-    .filter(isValidApplication)
-    .filter(item => !!item.featured);
+  // Convert objects to arrays and filter featured items
+  const operatingSystemsArray = Object.values(OperatingSystems).filter(
+    isValidApplication
+  );
+  const applicationsArray = Object.values(applications).filter(isValidApplication);
+  const gamesArray = Object.values(games).filter(isValidApplication);
+  const websitesArray = Object.values(websites).filter(isValidApplication);
+  const browsersArray = Object.values(browsers).filter(isValidApplication);
 
   const [filteredResults, setFilteredResults] = useState({
     operatingSystems: operatingSystemsArray,
@@ -694,7 +687,7 @@ export default function Home() {
     browsers: browsersArray,
   });
 
-
+  // Search handler
   const handleSearch = (query: string) => {
     const lowerCaseQuery = query.toLowerCase();
     setSearchQuery(query);
@@ -702,29 +695,24 @@ export default function Home() {
     if (lowerCaseQuery) {
       setFilteredResults({
         operatingSystems: operatingSystemsArray.filter(
-          item =>
-            item.name.toLowerCase().includes(lowerCaseQuery) ||
-            item.description.toLowerCase().includes(lowerCaseQuery)
+          (item) =>
+            item.name.toLowerCase().includes(lowerCaseQuery) 
         ),
         applications: applicationsArray.filter(
-          item =>
-            item.name.toLowerCase().includes(lowerCaseQuery) ||
-            item.description.toLowerCase().includes(lowerCaseQuery)
+          (item) =>
+            item.name.toLowerCase().includes(lowerCaseQuery) 
         ),
         games: gamesArray.filter(
-          item =>
-            item.name.toLowerCase().includes(lowerCaseQuery) ||
-            item.description.toLowerCase().includes(lowerCaseQuery)
+          (item) =>
+            item.name.toLowerCase().includes(lowerCaseQuery)
         ),
         websites: websitesArray.filter(
-          item =>
-            item.name.toLowerCase().includes(lowerCaseQuery) ||
-            item.description.toLowerCase().includes(lowerCaseQuery)
+          (item) =>
+            item.name.toLowerCase().includes(lowerCaseQuery) 
         ),
         browsers: browsersArray.filter(
-          item =>
-            item.name.toLowerCase().includes(lowerCaseQuery) ||
-            item.description.toLowerCase().includes(lowerCaseQuery)
+          (item) =>
+            item.name.toLowerCase().includes(lowerCaseQuery) 
         ),
       });
     } else {
@@ -739,66 +727,83 @@ export default function Home() {
   };
 
   return (
-    <div className="space-y-12">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold tracking-tight mb-4">
-          Keyboard Shortcuts Hub
-        </h1>
-        <p className="text-xl text-muted-foreground mb-8">
-          Your one-stop destination for keyboard shortcuts across different platforms
-        </p>
-        <div className="max-w-2xl mx-auto">
-          <input
-            type="text"
-            placeholder="Search applications, games, OS, websites..."
-            value={searchQuery}
-            onChange={(e) => handleSearch(e.target.value)}
-            className="w-full px-4 py-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
+    <>
+      {/* Meta Information for SEO */}
+      <Head>
+        <title>Boost My Key - Your Keyboard Shortcuts Directory</title>
+        <meta
+          name="description"
+          content="Discover keyboard shortcuts for software, games, operating systems, websites, and browsers."
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://boostmykey.com/" />
+      </Head>
+
+      {/* Main Page Content */}
+      <div className="space-y-12">
+        {/* Search Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">
+            Keyboard Shortcuts Hub
+          </h1>
+          <p className="text-xl text-muted-foreground mb-8">
+            Your one-stop destination for keyboard shortcuts across different platforms
+          </p>
+          <div className="max-w-2xl mx-auto">
+            <input
+              type="text"
+              placeholder="Search applications, games, OS, websites..."
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
+              className="w-full px-4 py-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+        </div>
+
+        {/* Categories */}
+        <div className="space-y-16">
+          {filteredResults.operatingSystems.length > 0 && (
+            <CategoryCard
+              title="Operating Systems"
+              items={filteredResults.operatingSystems}
+              baseUrl="/os"
+            />
+          )}
+          {filteredResults.applications.length > 0 && (
+            <CategoryCard
+              title="Software"
+              items={filteredResults.applications}
+              baseUrl="/software"
+            />
+          )}
+          {filteredResults.games.length > 0 && (
+            <CategoryCard
+              title="Games"
+              items={filteredResults.games}
+              baseUrl="/games"
+            />
+          )}
+          {filteredResults.websites.length > 0 && (
+            <CategoryCard
+              title="Websites"
+              items={filteredResults.websites}
+              baseUrl="/websites"
+            />
+          )}
+          {filteredResults.browsers.length > 0 && (
+            <CategoryCard
+              title="Browsers"
+              items={filteredResults.browsers}
+              baseUrl="/browsers"
+            />
+          )}
+
+          {/* No Results */}
+          {Object.values(filteredResults).every((arr) => arr.length === 0) && (
+            <p className="text-center text-gray-500 py-8">No results found.</p>
+          )}
         </div>
       </div>
-
-      <div className="space-y-16">
-        {operatingSystemsArray.length > 0 && (
-          <CategoryCard
-            title="Operating Systems"
-            items={filteredResults.operatingSystems}
-            baseUrl="/os"
-          />
-        )}
-        {applicationsArray.length > 0 && (
-          <CategoryCard
-            title="Software"
-            items={filteredResults.applications}
-            baseUrl="/software"
-          />
-        )}
-        {gamesArray.length > 0 && (
-          <CategoryCard
-            title="Games"
-            items={filteredResults.games}
-            baseUrl="/games"
-          />
-        )}
-        {websitesArray.length > 0 && (
-          <CategoryCard
-            title="Websites"
-            items={filteredResults.websites}
-            baseUrl="/websites"
-          />
-        )}
-        {filteredResults.browsers.length > 0 && (
-          <CategoryCard
-            title="Browsers"
-            items={filteredResults.browsers}
-            baseUrl="/browsers"
-          />
-        )}
-
-        {Object.values(filteredResults).every(arr => arr.length === 0) && (
-          <p className="text-center text-gray-500 py-8">No results found.</p>
-        )}
-      </div>
-    </div>
+    </>
   );
 }

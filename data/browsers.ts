@@ -1,58 +1,34 @@
-export const browsers = {
-    // "google-chrome": {
-    //   id: "google-chrome",
-    //   name: "Google Chrome",
-    //   icon: "/icons/browsers/chrome.svg",
-    //   description: "Shortcuts for Google Chrome browser",
-    //   platforms: ["windows", "macos"],
-    //   featured: true,
-    //   groups: [
-    //     {
-    //       title: "General Shortcuts",
-    //       shortcuts: [
-    //         {
-    //           id: "1",
-    //           keys: ["Ctrl", "+", "N"],
-    //           description: "Open a new window",
-    //           platforms: { windows: ["Ctrl + N"], mac: ["⌘ + N"] },
-    //         },
-    //         {
-    //           id: "2",
-    //           keys: ["Ctrl", "+", "T"],
-    //           description: "Open a new tab",
-    //           platforms: { windows: ["Ctrl + T"], mac: ["⌘ + T"] },
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       title: "Navigation",
-    //       shortcuts: [
-    //         {
-    //           id: "3",
-    //           keys: ["Alt", "+", "Left Arrow"],
-    //           description: "Go back to the previous page",
-    //           platforms: { windows: ["Alt + Left Arrow"], mac: ["⌘ + ["] },
-    //         },
-    //         {
-    //           id: "4",
-    //           keys: ["Alt", "+", "Right Arrow"],
-    //           description: "Go forward to the next page",
-    //           platforms: { windows: ["Alt + Right Arrow"], mac: ["⌘ + ]"] },
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
+
+
+// export interface Browser {
+//     id: string;
+//     name: string;
+//     icon: string;
+//     description: string;
+//     platforms: string;
+//     featured: boolean;
+//     groups: { title: string; shortcuts: any[] }[];
+//     shortcutpageName: string; // Ensure this is included
+//     metadescription: string; // Ensure this is included
+// }
+
+
+import { CategoryItems } from "@/data/types";
+
+
+
+export const browsers: CategoryItems = {
+
     "mozilla-firefox": {
-        "id": "mozilla-firefox",
-        "name": "Mozilla Firefox",
-        "icon": "/icons/browsers/firefox.svg",
-        "description": "Keyboard Shortcuts for Mozilla Firefox - Updated for MacOS and Windows OS",
-        "platforms": [
-            "windows",
-            "macos"
-        ],
-        "featured": true,
+        id: "mozilla-firefox",
+        name: "Mozilla Firefox",
+        officialURL: "https://www.mozilla.org/",
+        shortcutpageName: "Mozilla Firefox Keyboard Shortcuts",
+        icon: "/icons/browsers/firefox.svg",
+        description: "Mastering keyboard shortcuts in Mozilla Firefox can enhance your browsing experience by enabling faster navigation, tab management, and control over settings on both Windows and macOS.",
+        metadescription: "Check all Mozilla Firefox Keyboard Shortcuts to browse more efficiently. These Firefox shortcuts are updated for MacOS and Windows OS.",
+        platforms: ["windows", "macos"],
+        featured: true,
         "groups": [
             {
                 "title": "Navigation Shortcuts",
@@ -180,15 +156,15 @@ export const browsers = {
         ]
     },
     "google-chrome": {
-        "id": "google-chrome",
-        "name": "Google Chrome",
-        "icon": "/icons/browsers/chrome.svg",
-        "description": "Shortcuts for Google Chrome - Updated for MacOS and Windows OS",
-        "platforms": [
-            "windows",
-            "macos"
-        ],
-        "featured": true,
+        id: "google-chrome",
+        name: "Google Chrome",
+        officialURL: "https://www.google.com/chrome/",
+        shortcutpageName: "44+ Google Chrome Browser Keyboard Shortcuts",
+        icon: "/icons/browsers/chrome.svg",
+        description: "Mastering keyboard shortcuts in Google Chrome can optimize your browsing efficiency, enabling quicker navigation, tab management, and control over browser settings on both Windows and macOS.",
+        metadescription: "Check all Google Chrome Keyboard Shortcuts to browse faster. These Chrome shortcuts are updated for MacOS and Windows OS.",
+        platforms: ["windows", "macos"],
+        featured: true,
         "groups": [
             {
                 "title": "Tab Management",
@@ -372,15 +348,15 @@ export const browsers = {
         ]
     },
     "microsoft-edge": {
-        "id": "microsoft-edge",
-        "name": "Microsoft Edge",
-        "icon": "/icons/browsers/edge.png",
-        "description": "Shortcuts for Microsoft Edge - Updated for MacOS and Windows OS",
-        "platforms": [
-            "windows",
-            "macos"
-        ],
-        "featured": true,
+        id: "microsoft-edge",
+        name: "Microsoft Edge",
+        officialURL: "https://www.microsoft.com/edge",
+        shortcutpageName: "Microsoft Edge Browser Keyboard Shortcuts",
+        icon: "/icons/browsers/edge.png",
+        description: "Mastering keyboard shortcuts in Microsoft Edge can streamline your browsing by enabling faster navigation, tab control, and management of browser settings on both Windows and macOS.",
+        metadescription: "Check all Microsoft Edge Keyboard Shortcuts to browse efficiently. These Edge shortcuts are updated for MacOS and Windows OS.",
+        platforms: ["windows", "macos"],
+        featured: true,
         "groups": [
             {
                 "title": "Navigation Shortcuts",
@@ -645,15 +621,15 @@ export const browsers = {
         ]
     },
     "uc-browser": {
-        "id": "uc-browser",
-        "name": "UC Browser",
-        "icon": "/icons/browsers/uc-browser.svg",
-        "description": "Shortcuts for UC Browser - Updated for MacOS and Windows OS",
-        "platforms": [
-            "windows",
-            "macos"
-        ],
-        "featured": true,
+        id: "uc-browser",
+        name: "UC Browser",
+        officialURL: "https://www.ucweb.com/",
+        shortcutpageName: "UC Browser Keyboard Shortcuts",
+        icon: "/icons/browsers/uc-browser.svg",
+        description: "Mastering keyboard shortcuts in UC Browser can improve your browsing experience by enabling efficient tab management, navigation, and customization on both Windows and macOS.",
+        metadescription: "Check all UC Browser Keyboard Shortcuts to browse faster. These UC Browser shortcuts are updated for MacOS and Windows OS.",
+        platforms: ["windows", "macos"],
+        featured: true,
         "groups": [
             {
                 "title": "Basic Shortcuts",
@@ -728,15 +704,15 @@ export const browsers = {
         ]
     },
     "tor-browser": {
-        "id": "tor-browser",
-        "name": "Tor Browser",
-        "icon": "/icons/browsers/tor.svg",
-        "description": "Shortcuts for Tor Browser - Updated for MacOS and Windows OS",
-        "platforms": [
-            "windows",
-            "macos"
-        ],
-        "featured": true,
+        id: "tor-browser",
+        name: "Tor Browser",
+        officialURL: "https://www.torproject.org/",
+        shortcutpageName: "Tor Browser Keyboard Shortcuts",
+        icon: "/icons/browsers/tor.svg",
+        description: "Mastering keyboard shortcuts in Tor Browser can make secure browsing more efficient, enabling quicker navigation, tab management, and privacy controls on both Windows and macOS.",
+        metadescription: "Check all Tor Browser Keyboard Shortcuts to browse securely and efficiently. These Tor shortcuts are updated for MacOS and Windows OS.",
+        platforms: ["windows", "macos"],
+        featured: true,
         "groups": [
             {
                 "title": "Basic Navigation",
@@ -811,15 +787,15 @@ export const browsers = {
         ]
     },
     "maxthon-browser": {
-        "id": "maxthon-browser",
-        "name": "Maxthon Browser",
-        "icon": "/icons/browsers/maxthon.svg",
-        "description": "Shortcuts for Maxthon Browser - Updated for MacOS and Windows OS",
-        "platforms": [
-            "windows",
-            "macos"
-        ],
-        "featured": true,
+        id: "maxthon-browser",
+        name: "Maxthon Browser",
+        officialURL: "https://www.maxthon.com/",
+        shortcutpageName: "Maxthon Browser Keyboard Shortcuts",
+        icon: "/icons/browsers/maxthon.svg",
+        description: "Mastering keyboard shortcuts in Maxthon Browser can enhance your browsing efficiency by allowing quicker navigation, tab management, and control of browser features on both Windows and macOS.",
+        metadescription: "Check all Maxthon Browser Keyboard Shortcuts to optimize your browsing experience. These Maxthon shortcuts are updated for MacOS and Windows OS.",
+        platforms: ["windows", "macos"],
+        featured: true,
         "groups": [
             {
                 "title": "Navigation",
@@ -1024,15 +1000,15 @@ export const browsers = {
         ]
     },
     "safari": {
-        "id": "safari",
-        "name": "Safari",
-        "icon": "/icons/browsers/safari.svg",
-        "description": "Shortcuts for Safari - Updated for MacOS and Windows OS",
-        "platforms": [
-            "windows",
-            "macos"
-        ],
-        "featured": true,
+        id: "safari",
+        name: "Safari",
+        officialURL: "https://www.apple.com/safari/",
+        shortcutpageName: "Best Safari Browser Keyboard Shortcuts",
+        icon: "/icons/browsers/safari.svg",
+        description: "Mastering keyboard shortcuts in Safari can improve your browsing experience on macOS and Windows by enabling quicker navigation, tab management, and browser customization.",
+        metadescription: "Check all Safari Keyboard Shortcuts to browse effortlessly. These Safari shortcuts are updated for MacOS and Windows OS.",
+        platforms: ["windows", "macos"],
+        featured: true,
         "groups": [
             {
                 "title": "Navigation Shortcuts",
@@ -1228,15 +1204,15 @@ export const browsers = {
         ]
     },
     "opera-browser": {
-        "id": "opera-browser",
-        "name": "Opera Browser",
-        "icon": "/icons/browsers/opera.svg",
-        "description": "Shortcuts for Opera Browser - Updated for MacOS and Windows OS",
-        "platforms": [
-            "windows",
-            "macos"
-        ],
-        "featured": true,
+        id: "opera-browser",
+        name: "Opera Browser",
+        officialURL: "https://www.opera.com/",
+        shortcutpageName: "Opera Browser Keyboard Shortcuts",
+        icon: "/icons/browsers/opera.svg",
+        description: "Mastering keyboard shortcuts in Opera Browser can make browsing faster and more efficient by enabling quick navigation, tab control, and feature management on both Windows and macOS.",
+        metadescription: "Check all Opera Browser Keyboard Shortcuts to enhance your browsing experience. These Opera shortcuts are updated for MacOS and Windows OS.",
+        platforms: ["windows", "macos"],
+        featured: true,
         "groups": [
             {
                 "title": "Navigation Shortcuts",
@@ -1476,15 +1452,15 @@ export const browsers = {
         ]
     },
     "arc-browser": {
-        "id": "arc-browser",
-        "name": "Arc Browser",
-        "icon": "/icons/browsers/arc.svg",
-        "description": "Shortcuts for Arc Browser - Updated for MacOS and Windows OS",
-        "platforms": [
-            "windows",
-            "macos"
-        ],
-        "featured": true,
+        id: "arc-browser",
+        name: "Arc Browser",
+        officialURL: "https://arc.net/",
+        shortcutpageName: "Arc Browser Keyboard Shortcuts",
+        icon: "/icons/browsers/arc.svg",
+        description: "Mastering keyboard shortcuts in Arc Browser can improve your browsing productivity by allowing faster navigation, tab management, and efficient use of browser features on both Windows and macOS.",
+        metadescription: "Check all Arc Browser Keyboard Shortcuts to browse effectively. These Arc Browser shortcuts are updated for MacOS and Windows OS.",
+        platforms: ["windows", "macos"],
+        featured: false,
         "groups": [
             {
                 "title": "Navigation Shortcuts",
@@ -1664,11 +1640,10 @@ export const browsers = {
         ]
     }
 
+};
 
 
+// as const;
 
-} as const;
-
-
-export type Browsers = typeof browsers;
-export type BrowserId = keyof Browsers;
+// export type Browsers = typeof browsers;
+// export type BrowserId = keyof Browsers;

@@ -1,14 +1,16 @@
 // data/operating-systems.ts
-import { Application } from "@/types/shortcut";
+// import { Application } from "@/types/shortcut";
 
+import { CategoryItems } from "@/data/types";
 
-
-export const operatingSystems: { [key: string]: Application } = {
+export const OperatingSystems: CategoryItems = {
     "windows": {
         id: "windows",
-        name: "Windows",
+        name: "Windows 11",
+        shortcutpageName: "100+ Windows 11 Keyboard Shortcuts",
         icon: "/icons/os/windows.svg",
-        description: "Shortcuts for Windows OS",
+        description: "Mastering keyboard shortcuts in Windows OS can significantly enhance your productivity by allowing quick navigation, multitasking, and system control without relying on the mouse. These shortcuts streamline common tasks like file management, window switching, and system commands, ensuring efficiency for both beginners and power users.",
+        metadescription: "Check all Windows 11 Keyboard Shortcuts to make your life easlier. These Windows 11 keyboard shortcuts will save you a lot of time.",
         platforms: ["windows"],
         featured: true,
         groups: [
@@ -501,14 +503,16 @@ export const operatingSystems: { [key: string]: Application } = {
             }
         ]
     },
-
     "macos": {
         id: "macos",
         name: "macOS",
+        shortcutpageName: "80+ macOS Keyboard Shortcuts",
         icon: "/icons/os/macos.svg",
-        description: "Essential macOS keyboard shortcuts",
+        description: "Mastering keyboard shortcuts in macOS can greatly enhance your productivity by allowing efficient navigation, multitasking, and system control without depending on the mouse. These shortcuts streamline everyday tasks like file management, window switching, and system commands, ensuring seamless operation for both novice and experienced users.",
+        metadescription: "Check all macOS Keyboard Shortcuts to make your life easier. These macOS keyboard shortcuts will save you a lot of time.",
         platforms: ["macos"],
         featured: true,
+        
         groups: [
             {
                 title: "System",
@@ -839,10 +843,13 @@ export const operatingSystems: { [key: string]: Application } = {
     "linux": {
         id: "linux",
         name: "Linux",
+        shortcutpageName: "Linux Keyboard Shortcuts",
         icon: "/icons/os/linux.png",
-        description: "Comprehensive Linux keyboard shortcuts",
+        description: "Mastering keyboard shortcuts in Linux can significantly boost your efficiency by enabling quick navigation, multitasking, and system control without relying on a mouse. These shortcuts simplify routine tasks like file management, terminal commands, and window operations, catering to both beginners and power users.",
+        metadescription: "Check all Linux Keyboard Shortcuts to make your life easier. These Linux keyboard shortcuts will save you a lot of time.",
         platforms: ["linux"],
         featured: true,
+        
         groups: [
             {
                 title: "System",
@@ -1098,69 +1105,232 @@ export const operatingSystems: { [key: string]: Application } = {
             }
         ]
     },
-
     "chromeos": {
         id: "chromeos",
         name: "ChromeOS",
+        shortcutpageName: "ChromeOS Keyboard Shortcuts",
         icon: "/icons/os/chromeos.svg",
-        description: "Essential ChromeOS shortcuts for Chromebooks",
+        description: "Mastering keyboard shortcuts in ChromeOS can enhance your productivity by enabling swift navigation, multitasking, and system control without relying on touch or a mouse. These shortcuts simplify everyday tasks on Chromebooks, ensuring efficiency for both casual and advanced users.",
+        metadescription: "Check all ChromeOS Keyboard Shortcuts to make your life easier. These ChromeOS keyboard shortcuts will save you a lot of time.",
         platforms: ["linux"],
         featured: true,
-        groups: [
+        "groups": [
             {
-                title: "System Shortcuts",
-                shortcuts: [
+                "title": "System Shortcuts",
+                "shortcuts": [
                     {
-                        id: "1",
-                        keys: ["Ctrl", "+", "Alt", "+", "T"],
-                        description: "Open the terminal (Crosh)",
-                        platforms: {
-                            linux: ["Ctrl", "+", "Alt", "+", "T"]
+                        "id": "1",
+                        "keys": ["Ctrl", "+", "Alt", "+", "T"],
+                        "description": "Open the terminal (Crosh)",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Alt", "+", "T"]
                         }
                     },
                     {
-                        id: "2",
-                        keys: ["Ctrl", "+", "Shift", "+", "Q"],
-                        description: "Sign out of the account",
-                        platforms: {
-                            linux: ["Ctrl", "+", "Shift", "+", "Q"]
+                        "id": "2",
+                        "keys": ["Ctrl", "+", "Shift", "+", "Q"],
+                        "description": "Sign out of the account",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Shift", "+", "Q"]
                         }
                     },
                     {
-                        id: "3",
-                        keys: ["Ctrl", "+", "Shift", "+", "P"],
-                        description: "Open the task manager",
-                        platforms: {
-                            linux: ["Ctrl", "+", "Shift", "+", "P"]
+                        "id": "3",
+                        "keys": ["Ctrl", "+", "Shift", "+", "P"],
+                        "description": "Open the task manager",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Shift", "+", "P"]
                         }
                     },
                     {
-                        id: "4",
-                        keys: ["Ctrl", "+", "Shift", "+", "R"],
-                        description: "Restart ChromeOS",
-                        platforms: {
-                            linux: ["Ctrl", "+", "Shift", "+", "R"]
+                        "id": "4",
+                        "keys": ["Ctrl", "+", "Shift", "+", "R"],
+                        "description": "Restart ChromeOS",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Shift", "+", "R"]
                         }
                     },
                     {
-                        id: "5",
-                        keys: ["Ctrl", "+", "Alt", "+", "E"],
-                        description: "Open the network login screen",
-                        platforms: {
-                            linux: ["Ctrl", "+", "Alt", "+", "E"]
+                        "id": "5",
+                        "keys": ["Ctrl", "+", "Alt", "+", "E"],
+                        "description": "Open the network login screen",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Alt", "+", "E"]
+                        }
+                    },
+                    {
+                        "id": "6",
+                        "keys": ["Ctrl", "+", "Alt", "+", "/"],
+                        "description": "View all keyboard shortcuts",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Alt", "+", "/"]
+                        }
+                    },
+                    {
+                        "id": "7",
+                        "keys": ["Search", "+", "L"],
+                        "description": "Lock the screen",
+                        "platforms": {
+                            "linux": ["Search", "+", "L"]
                         }
                     }
                 ]
             },
             {
-                title: "Window and Tab Management",
-                shortcuts: [
+                "title": "Window and Tab Management",
+                "shortcuts": [
                     {
-                        id: "6",
-                        keys: ["Ctrl", "+", "N"],
-                        description: "Open a new window",
-                        platforms: {
-                            linux: ["Ctrl", "+", "N"]
+                        "id": "8",
+                        "keys": ["Ctrl", "+", "N"],
+                        "description": "Open a new window",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "N"]
+                        }
+                    },
+                    {
+                        "id": "9",
+                        "keys": ["Ctrl", "+", "T"],
+                        "description": "Open a new tab",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "T"]
+                        }
+                    },
+                    {
+                        "id": "10",
+                        "keys": ["Ctrl", "+", "W"],
+                        "description": "Close the current tab",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "W"]
+                        }
+                    },
+                    {
+                        "id": "11",
+                        "keys": ["Ctrl", "+", "Shift", "+", "W"],
+                        "description": "Close the current window",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Shift", "+", "W"]
+                        }
+                    },
+                    {
+                        "id": "12",
+                        "keys": ["Ctrl", "+", "Shift", "+", "T"],
+                        "description": "Reopen the last closed tab",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Shift", "+", "T"]
+                        }
+                    },
+                    {
+                        "id": "13",
+                        "keys": ["Ctrl", "+", "Shift", "+", "N"],
+                        "description": "Open a new incognito window",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Shift", "+", "N"]
+                        }
+                    },
+                    {
+                        "id": "14",
+                        "keys": ["Ctrl", "+", "Tab"],
+                        "description": "Switch to the next tab",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Tab"]
+                        }
+                    },
+                    {
+                        "id": "15",
+                        "keys": ["Ctrl", "+", "Shift", "+", "Tab"],
+                        "description": "Switch to the previous tab",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Shift", "+", "Tab"]
+                        }
+                    },
+                    {
+                        "id": "16",
+                        "keys": ["Alt", "+", "["],
+                        "description": "Dock window to the left",
+                        "platforms": {
+                            "linux": ["Alt", "+", "["]
+                        }
+                    },
+                    {
+                        "id": "17",
+                        "keys": ["Alt", "+", "]"],
+                        "description": "Dock window to the right",
+                        "platforms": {
+                            "linux": ["Alt", "+", "]"]
+                        }
+                    },
+                    {
+                        "id": "18",
+                        "keys": ["Alt", "+", "="],
+                        "description": "Maximize the window",
+                        "platforms": {
+                            "linux": ["Alt", "+", "="]
+                        }
+                    },
+                    {
+                        "id": "19",
+                        "keys": ["Alt", "+", "-"],
+                        "description": "Minimize the window",
+                        "platforms": {
+                            "linux": ["Alt", "+", "-"]
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Accessibility",
+                "shortcuts": [
+                    {
+                        "id": "20",
+                        "keys": ["Ctrl", "+", "Search", "+", "M"],
+                        "description": "Toggle ChromeVox (spoken feedback)",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Search", "+", "M"]
+                        }
+                    },
+                    {
+                        "id": "21",
+                        "keys": ["Ctrl", "+", "Alt", "+", "Z"],
+                        "description": "Enable/disable screen magnifier",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Alt", "+", "Z"]
+                        }
+                    },
+                    {
+                        "id": "22",
+                        "keys": ["Ctrl", "+", "Alt", "+", "S"],
+                        "description": "Open accessibility settings",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Alt", "+", "S"]
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Screenshots",
+                "shortcuts": [
+                    {
+                        "id": "23",
+                        "keys": ["Ctrl", "+", "Overview Key"],
+                        "description": "Take a screenshot",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Overview Key"]
+                        }
+                    },
+                    {
+                        "id": "24",
+                        "keys": ["Ctrl", "+", "Shift", "+", "Overview Key"],
+                        "description": "Capture part of the screen",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Shift", "+", "Overview Key"]
+                        }
+                    },
+                    {
+                        "id": "25",
+                        "keys": ["Ctrl", "+", "Alt", "+", "Overview Key"],
+                        "description": "Record the screen",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Alt", "+", "Overview Key"]
                         }
                     }
                 ]
@@ -1170,226 +1340,274 @@ export const operatingSystems: { [key: string]: Application } = {
     "unix": {
         id: "unix",
         name: "Unix - Terminal Based OS",
+        shortcutpageName: "Unix - Terminal Based OS Keyboard Shortcuts",
         icon: "/icons/os/unix.png",
-        platforms: ["linux"],  // Added root level platforms array
-        description: "Comprehensive Unix shortcuts for terminal-based systems",
+        description: "Mastering keyboard shortcuts in Unix systems can significantly improve your workflow by allowing efficient navigation and command execution in terminal-based environments. These shortcuts are essential for system administrators and developers seeking to optimize their productivity.",
+        metadescription: "Check all Unix Keyboard Shortcuts to make your life easier. These Unix keyboard shortcuts will save you a lot of time.",
+        platforms: ["linux"],
         featured: true,
-        groups: [
+        
+        "groups": [
             {
-                title: "Basic Terminal Shortcuts",
-                shortcuts: [
+                "title": "Basic Terminal Shortcuts",
+                "shortcuts": [
                     {
-                        id: "1",
-                        keys: ["Ctrl", "+", "U"],
-                        description: "Clear the current command line",
-                        platforms: {
-                            linux: ["Ctrl", "+", "U"]
+                        "id": "1",
+                        "keys": ["Ctrl", "+", "U"],
+                        "description": "Clear the current command line",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "U"]
                         }
                     },
                     {
-                        id: "2",
-                        keys: ["Ctrl", "+", "W"],
-                        description: "Delete the previous word in the terminal",
-                        platforms: {
-                            linux: ["Ctrl", "+", "W"]
+                        "id": "2",
+                        "keys": ["Ctrl", "+", "W"],
+                        "description": "Delete the previous word in the terminal",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "W"]
                         }
                     },
                     {
-                        id: "3",
-                        keys: ["Ctrl", "+", "D"],
-                        description: "Exit the current terminal session",
-                        platforms: {
-                            linux: ["Ctrl", "+", "D"]
+                        "id": "3",
+                        "keys": ["Ctrl", "+", "D"],
+                        "description": "Exit the current terminal session",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "D"]
                         }
                     },
                     {
-                        id: "4",
-                        keys: ["Ctrl", "+", "C"],
-                        description: "Interrupt/stop the current process",
-                        platforms: {
-                            linux: ["Ctrl", "+", "C"]
+                        "id": "4",
+                        "keys": ["Ctrl", "+", "C"],
+                        "description": "Interrupt/stop the current process",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "C"]
                         }
                     },
                     {
-                        id: "5",
-                        keys: ["Ctrl", "+", "Z"],
-                        description: "Suspend the current process",
-                        platforms: {
-                            linux: ["Ctrl", "+", "Z"]
+                        "id": "5",
+                        "keys": ["Ctrl", "+", "Z"],
+                        "description": "Suspend the current process",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Z"]
+                        }
+                    },
+                    {
+                        "id": "6",
+                        "keys": ["Ctrl", "+", "Y"],
+                        "description": "Paste the last cut text",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Y"]
+                        }
+                    },
+                    {
+                        "id": "7",
+                        "keys": ["Ctrl", "+", "K"],
+                        "description": "Cut everything from the cursor to the end of the line",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "K"]
+                        }
+                    },
+                    {
+                        "id": "8",
+                        "keys": ["Ctrl", "+", "X"],
+                        "description": "Exchange the cursor's current position with the mark",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "X"]
+                        }
+                    },
+                    {
+                        "id": "9",
+                        "keys": ["Ctrl", "+", "H"],
+                        "description": "Delete the previous character",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "H"]
+                        }
+                    },
+                    {
+                        "id": "10",
+                        "keys": ["Ctrl", "+", "/"],
+                        "description": "Undo the last operation",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "/"]
                         }
                     }
                 ]
             },
             {
-                title: "Navigation Shortcuts",
-                shortcuts: [
+                "title": "Navigation Shortcuts",
+                "shortcuts": [
                     {
-                        id: "6",
-                        keys: ["Ctrl", "+", "A"],
-                        description: "Move the cursor to the beginning of the line",
-                        platforms: {
-                            linux: ["Ctrl", "+", "A"]
+                        "id": "11",
+                        "keys": ["Ctrl", "+", "A"],
+                        "description": "Move the cursor to the beginning of the line",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "A"]
                         }
                     },
                     {
-                        id: "7",
-                        keys: ["Ctrl", "+", "E"],
-                        description: "Move the cursor to the end of the line",
-                        platforms: {
-                            linux: ["Ctrl", "+", "E"]
+                        "id": "12",
+                        "keys": ["Ctrl", "+", "E"],
+                        "description": "Move the cursor to the end of the line",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "E"]
                         }
                     },
                     {
-                        id: "8",
-                        keys: ["Alt", "+", "F"],
-                        description: "Move the cursor forward by one word",
-                        platforms: {
-                            linux: ["Alt", "+", "F"]
+                        "id": "13",
+                        "keys": ["Alt", "+", "F"],
+                        "description": "Move the cursor forward by one word",
+                        "platforms": {
+                            "linux": ["Alt", "+", "F"]
                         }
                     },
                     {
-                        id: "9",
-                        keys: ["Alt", "+", "B"],
-                        description: "Move the cursor backward by one word",
-                        platforms: {
-                            linux: ["Alt", "+", "B"]
+                        "id": "14",
+                        "keys": ["Alt", "+", "B"],
+                        "description": "Move the cursor backward by one word",
+                        "platforms": {
+                            "linux": ["Alt", "+", "B"]
+                        }
+                    },
+                    {
+                        "id": "15",
+                        "keys": ["Ctrl", "+", "B"],
+                        "description": "Move the cursor one character backward",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "B"]
+                        }
+                    },
+                    {
+                        "id": "16",
+                        "keys": ["Ctrl", "+", "F"],
+                        "description": "Move the cursor one character forward",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "F"]
+                        }
+                    },
+                    {
+                        "id": "17",
+                        "keys": ["Alt", "+", "D"],
+                        "description": "Delete the word after the cursor",
+                        "platforms": {
+                            "linux": ["Alt", "+", "D"]
+                        }
+                    },
+                    {
+                        "id": "18",
+                        "keys": ["Alt", "+", "Backspace"],
+                        "description": "Delete the word before the cursor",
+                        "platforms": {
+                            "linux": ["Alt", "+", "Backspace"]
                         }
                     }
                 ]
             },
             {
-                title: "Search and History",
-                shortcuts: [
+                "title": "Search and History",
+                "shortcuts": [
                     {
-                        id: "10",
-                        keys: ["Ctrl", "+", "R"],
-                        description: "Search through command history",
-                        platforms: {
-                            linux: ["Ctrl", "+", "R"]
+                        "id": "19",
+                        "keys": ["Ctrl", "+", "R"],
+                        "description": "Search through command history",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "R"]
                         }
                     },
                     {
-                        id: "11",
-                        keys: ["Ctrl", "+", "P"],
-                        description: "Repeat the previous command",
-                        platforms: {
-                            linux: ["Ctrl", "+", "P"]
+                        "id": "20",
+                        "keys": ["Ctrl", "+", "P"],
+                        "description": "Repeat the previous command",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "P"]
                         }
                     },
                     {
-                        id: "12",
-                        keys: ["Ctrl", "+", "N"],
-                        description: "Repeat the next command in history",
-                        platforms: {
-                            linux: ["Ctrl", "+", "N"]
+                        "id": "21",
+                        "keys": ["Ctrl", "+", "N"],
+                        "description": "Repeat the next command in history",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "N"]
                         }
                     },
                     {
-                        id: "13",
-                        keys: ["Ctrl", "+", "L"],
-                        description: "Clear the terminal screen",
-                        platforms: {
-                            linux: ["Ctrl", "+", "L"]
+                        "id": "22",
+                        "keys": ["Ctrl", "+", "L"],
+                        "description": "Clear the terminal screen",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "L"]
+                        }
+                    },
+                    {
+                        "id": "23",
+                        "keys": ["Alt", "+", "R"],
+                        "description": "Revert all changes made to a line",
+                        "platforms": {
+                            "linux": ["Alt", "+", "R"]
+                        }
+                    },
+                    {
+                        "id": "24",
+                        "keys": ["Ctrl", "+", "G"],
+                        "description": "Abort the current search",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "G"]
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Miscellaneous Shortcuts",
+                "shortcuts": [
+                    {
+                        "id": "25",
+                        "keys": ["Ctrl", "+", "T"],
+                        "description": "Transpose two characters",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "T"]
+                        }
+                    },
+                    {
+                        "id": "26",
+                        "keys": ["Alt", "+", "T"],
+                        "description": "Transpose two words",
+                        "platforms": {
+                            "linux": ["Alt", "+", "T"]
+                        }
+                    },
+                    {
+                        "id": "27",
+                        "keys": ["Ctrl", "+", "V"],
+                        "description": "Scroll down one screen",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "V"]
+                        }
+                    },
+                    {
+                        "id": "28",
+                        "keys": ["Ctrl", "+", "Y"],
+                        "description": "Paste the previously cut content",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Y"]
+                        }
+                    },
+                    {
+                        "id": "29",
+                        "keys": ["Ctrl", "+", "Q"],
+                        "description": "Resume output to the terminal after stopping it",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "Q"]
+                        }
+                    },
+                    {
+                        "id": "30",
+                        "keys": ["Ctrl", "+", "S"],
+                        "description": "Stop all output to the terminal",
+                        "platforms": {
+                            "linux": ["Ctrl", "+", "S"]
                         }
                     }
                 ]
             }
         ]
     }
-
 };
-
-
-
-
-// export const operatingSystems: { [key: string]: Application } = {
-
-// unix: {
-//   id: "unix",
-//   name: "Unix - Terminal Based OS",
-//   icon: "/icons/os/unix.png",
-//   description: "Comprehensive Unix shortcuts for terminal-based systems",
-//   groups: [
-//     {
-//       title: "Basic Terminal Shortcuts",
-//       shortcuts: [
-//         {
-//           id: "1",
-//           keys: ["Ctrl (Control)", "+", "U"],
-//           description: "Clear the current command line"
-//         },
-//         {
-//           id: "2",
-//           keys: ["Ctrl (Control)", "+", "W"],
-//           description: "Delete the previous word in the terminal"
-//         },
-//         {
-//           id: "3",
-//           keys: ["Ctrl (Control)", "+", "D"],
-//           description: "Exit the current terminal session"
-//         },
-//         {
-//           id: "4",
-//           keys: ["Ctrl (Control)", "+", "C"],
-//           description: "Interrupt/stop the current process"
-//         },
-//         {
-//           id: "5",
-//           keys: ["Ctrl (Control)", "+", "Z"],
-//           description: "Suspend the current process"
-//         }
-//       ]
-//     },
-//     {
-//       title: "Navigation Shortcuts",
-//       shortcuts: [
-//         {
-//           id: "6",
-//           keys: ["Ctrl (Control)", "+", "A"],
-//           description: "Move the cursor to the beginning of the line"
-//         },
-//         {
-//           id: "7",
-//           keys: ["Ctrl (Control)", "+", "E"],
-//           description: "Move the cursor to the end of the line"
-//         },
-//         {
-//           id: "8",
-//           keys: ["Alt (Alt)", "+", "F"],
-//           description: "Move the cursor forward by one word"
-//         },
-//         {
-//           id: "9",
-//           keys: ["Alt (Alt)", "+", "B"],
-//           description: "Move the cursor backward by one word"
-//         }
-//       ]
-//     },
-//     {
-//       title: "Search and History",
-//       shortcuts: [
-//         {
-//           id: "10",
-//           keys: ["Ctrl (Control)", "+", "R"],
-//           description: "Search through command history"
-//         },
-//         {
-//           id: "11",
-//           keys: ["Ctrl (Control)", "+", "P"],
-//           description: "Repeat the previous command"
-//         },
-//         {
-//           id: "12",
-//           keys: ["Ctrl (Control)", "+", "N"],
-//           description: "Repeat the next command in history"
-//         },
-//         {
-//           id: "13",
-//           keys: ["Ctrl (Control)", "+", "L"],
-//           description: "Clear the terminal screen"
-//         }
-//       ]
-//     }
-//   ]
-// },
-// };

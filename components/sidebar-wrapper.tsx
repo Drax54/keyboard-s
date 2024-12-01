@@ -11,11 +11,11 @@ export default function SidebarWrapper() {
   // Determine if we are on a detail page
   const isDetailPage =
     pathname.split("/").length > 2 &&
-    (pathname.startsWith("/software/") ||
-      pathname.startsWith("/os/") ||
-      pathname.startsWith("/games/") ||
-      pathname.startsWith("/browsers/") ||
-      pathname.startsWith("/websites/"));
+    (pathname.startsWith("/software") ||
+      pathname.startsWith("/os") ||
+      pathname.startsWith("/games") ||
+      pathname.startsWith("/browsers") ||
+      pathname.startsWith("/websites"));
 
   if (!isDetailPage) {
     return null;

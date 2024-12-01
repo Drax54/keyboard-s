@@ -18,11 +18,11 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <Command className="h-6 w-6 text-gray-700 dark:text-gray-200" />
               <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                KeyMaster
+              Boost My Key
               </span>
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Your ultimate guide to keyboard shortcuts for software, operating systems, games, and more
+            Discover keyboard shortcuts for software, games, and operating systems. KeyMaster is your ultimate guide to mastering productivity.
             </p>
           </div>
 
@@ -109,7 +109,7 @@ export default function Footer() {
             <h3 className="font-semibold mb-3 text-gray-900 dark:text-gray-100">Connect</h3>
             <div className="flex gap-4">
               <a
-                href="https://github.com"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
@@ -117,7 +117,7 @@ export default function Footer() {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="https://twitter.com"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
@@ -132,7 +132,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-gray-200 dark:border-gray-700">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-              <span>© {currentYear} KeyMaster. Made with</span>
+              <span>© {currentYear} Boost My Key. Made with</span>
               <Heart className="h-4 w-4 text-red-500 inline" />
               <span>by Veronica</span>
             </div>
